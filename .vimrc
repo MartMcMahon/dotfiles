@@ -221,12 +221,12 @@ nmap + :SyntasticCheck<CR>
 " NERDTree Git Plugin {{{
 let g:NERDTreeIndicatorMapCustom = {
   \ "Modified"  : "♦",
-  \ "Staged"    : "☭ ",
-  \ "Untracked" : "☽",
-  \ "Renamed"   : "名",
+  \ "Staged"    : "♯",
+  \ "Untracked" : "♠",
+  \ "Renamed"   : "♣",
   \ "Unmerged"  : "♪",
-  \ "Deleted"   : "☠ ",
-  \ "Dirty"     : "⛧ ",
+  \ "Deleted"   : "-",
+  \ "Dirty"     : "☼",
   \ "Clean"     : "♫",
   \ 'Ignored'   : 'I',
   \ "Unknown"   : "?"
