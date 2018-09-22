@@ -11,10 +11,13 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'omnisharp/omnisharp-vim'
+" Plugin 'powerline/powerline'
 Plugin 'colepeters/spacemacs-theme.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'machakann/vim-highlightedyank'
@@ -25,6 +28,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'srcery-colors/srcery-vim'
 
 call vundle#end()
 
@@ -36,12 +40,18 @@ filetype plugin indent on " load filetype-specific indent files
 if (has("termguicolors"))
   set termguicolors
 endif
+set t_Co=256
 set background=dark
+
+" colorscheme srcery
 
 colorscheme spacemacs-theme
 " highlight Normal ctermbg=NONE
 " highlight nonText ctermbg=NONE
-set t_Co=256
+" }}}
+
+" airline {{{
+let g:airline_theme='base16_spacemacs'
 " }}}
 
 " STATUS LINE {{{
@@ -201,50 +211,22 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+        \ "mode": "passive",
+        \ "active_filetypes": [],
+        \ "passive_filetypes": [] }
 nmap + :SyntasticCheck<CR>
-" }}}
-
-" Completor {{{
-" Use TAB to complete when typing words, else inserts TABs as usual.  Uses
-" " dictionary, source files, and completor to find matching words to
-" complete.
-
-" Note: usual completion is on <C-n> but more trouble to press all the time.
-" Never type the same word twice and maybe learn a new spellings!
-" Use the Linux dictionary when spelling is in doubt.
-" function! Tab_Or_Complete() abort
-"   " If completor is already open the `tab` cycles through suggested completions.
-"   if pumvisible()
-"     return "\<C-N>"
-"   " If completor is not open and we are in the middle of typing a word then
-"   " `tab` opens completor menu.
-"   elseif col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-"     return "\<C-R>=completor#do('complete')\<CR>"
-"   else
-"     " If we aren't typing a word and we press `tab` simply do the normal `tab`
-"     " action.
-"     return "\<Tab>"
-"   endif
-" endfunction
-
-" " Use `tab` key to select completions. Default is arrow keys.
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" " Use tab to trigger auto completion. Default suggests completions as you type.
-" let g:completor_auto_trigger = 0
-" inoremap <expr> <Tab> Tab_Or_Complete()
 " }}}
 
 " NERDTree Git Plugin {{{
 let g:NERDTreeIndicatorMapCustom = {
-  \ "Modified"  : "♪",
-  \ "Staged"    : "♦",
-  \ "Untracked" : "♯",
-  \ "Renamed"   : "N",
-  \ "Unmerged"  : "═",
-  \ "Deleted"   : "R",
-  \ "Dirty"     : "°",
+  \ "Modified"  : "♦",
+  \ "Staged"    : "☭ ",
+  \ "Untracked" : "☽",
+  \ "Renamed"   : "名",
+  \ "Unmerged"  : "♪",
+  \ "Deleted"   : "☠ ",
+  \ "Dirty"     : "⛧ ",
   \ "Clean"     : "♫",
   \ 'Ignored'   : 'I',
   \ "Unknown"   : "?"
@@ -252,7 +234,18 @@ let g:NERDTreeIndicatorMapCustom = {
 " }}}
 "
 
-
-
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
+
+
+" JSBeautify {{{
+autocmd FileType javascript noremap <buffer> <C-_> :call JsBeautify()<CR>
+" for json
+autocmd FileType json noremap <buffer> <C-_> :call JsonBeautify()<CR>
+" for jsx
+autocmd FileType jsx noremap <buffer> <C-_> :call JsxBeautify()<CR>
+" for html
+autocmd FileType html noremap <buffer> <C-_> :call HtmlBeautify()<CR>
+" for css or scss
+autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
+" }}}
