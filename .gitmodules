@@ -1,0 +1,24 @@
+[submodule ".vim/bundle/dracula-theme"]
+	path = .vim/bundle/dracula-theme
+	url = git@github.com:dracula/vim.git
+[submodule ".vim/ctrlp.vim"]
+  path = .vim/bundle/ctrlp.vim
+  url = https://github.com/kien/ctrlp.vim
+[submodule ".vim/vim-commentary"]
+  path = .vim/bundle/vim-commentary
+  url = https://github.com/tpope/vim-commentary
+[submodule ".vim/vim-surround"]
+  path = .vim/bundle/vim-surround
+  url = https://github.com/tpope/vim-surround
+[submodule ".vim/vim-gitgutter"]
+  path = .vim/bundle/vim-gitgutter
+  url = https://github.com/airblade/vim-gitgutter
+[submodule ".vim/nerdtree"]
+  path = .vim/bundle/nerdtree
+  url = https://github.com/scrooloose/nerdtree
+[submodule ".vim/bundle/vim-repeat"]
+  path = .vim/bundle/vim-repeat
+  url = git://github.com/tpope/vim-repeat.git
+[submodule ".vim/bundle/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
+	url = git@github.com:VundleVim/Vundle.vim.git
