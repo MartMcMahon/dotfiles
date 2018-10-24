@@ -6,13 +6,12 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
-" Plugin 'maralla/completor.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'omnisharp/omnisharp-vim'
-" Plugin 'powerline/powerline'
 Plugin 'colepeters/spacemacs-theme.vim'
+Plugin 'suy/vim-context-commentstring'
 Plugin 'scrooloose/syntastic'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-airline/vim-airline'
@@ -23,7 +22,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
@@ -34,6 +32,7 @@ call vundle#end()
 
 syntax on
 filetype plugin indent on " load filetype-specific indent files
+filetype plugin on
 
 " COLORS {{{
 " colorscheme dracula
@@ -64,7 +63,7 @@ set laststatus=2
 " MISC {{{
 
 " Use the clipboard as the default register
-set clipboard=unnamed "
+" set clipboard=unnamed "
 
 " Configure backspacing to work 'normally'
 set backspace=indent,eol,start
@@ -147,7 +146,7 @@ set hlsearch            " highlight matches
 imap jj <Esc>
 
 " windows
-nmap <c-w><Bar> :vsplit<CR>
+nmap <c-w><space> :vsplit<CR>
 nmap <c-w>-     :split<CR>
 
 " Movement {{{
@@ -163,16 +162,7 @@ nmap <c-l> 3l
 " nmap gk <C-w>k
 " nmap gl <C-w>l
 
-" 'grab' line and move it up/down
-nmap gj ddjP<Esc>
-nmap gk ddkP<Esc>
-
-" highlight last inserted text
-" nnoremap gV `[v`]
-" }}}
-
 " NERDTree {{{
-
 " Automatically delete the buffer of the file you just deleted with NerdTree:
 let NERDTreeAutoDeleteBuffer = 1
 
@@ -249,3 +239,9 @@ autocmd FileType html noremap <buffer> <C-_> :call HtmlBeautify()<CR>
 " for css or scss
 autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
 " }}}
+
+" map enter to insert a new line
+map <CR> i<CR><ESC>l
+
+" map ctrl-backspace to delete previous word in insert mode
+imap <C-BS> <C-W>
