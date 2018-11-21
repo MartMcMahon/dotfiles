@@ -6,12 +6,15 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'w0rp/ale'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'omnisharp/omnisharp-vim'
 Plugin 'colepeters/spacemacs-theme.vim'
 Plugin 'suy/vim-context-commentstring'
+Plugin 'lifepillar/vim-solarized8'
 Plugin 'scrooloose/syntastic'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-airline/vim-airline'
@@ -21,6 +24,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
 Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
@@ -227,16 +231,11 @@ let g:NERDTreeIndicatorMapCustom = {
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
 
-
 " JSBeautify {{{
 autocmd FileType javascript noremap <buffer> <C-_> :call JsBeautify()<CR>
-" for json
 autocmd FileType json noremap <buffer> <C-_> :call JsonBeautify()<CR>
-" for jsx
 autocmd FileType jsx noremap <buffer> <C-_> :call JsxBeautify()<CR>
-" for html
 autocmd FileType html noremap <buffer> <C-_> :call HtmlBeautify()<CR>
-" for css or scss
 autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
 " }}}
 
@@ -245,3 +244,13 @@ map <CR> i<CR><ESC>l
 
 " map ctrl-backspace to delete previous word in insert mode
 imap <C-BS> <C-W>
+
+" Ale settings
+" (async eslint'ing)
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+
+" Emmet-vim settings
+imap <C-Z> <C-Y>,
+
