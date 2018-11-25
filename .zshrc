@@ -65,9 +65,10 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  zsh-dircolors-solarized
+  # zsh-dircolors-solarized
 )
 
+eval `dircolors ~/.oh-my-zsh/custom/plugins/zsh-dircolors-solarized/dircolors-solarized/dircolors.256dark`
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
