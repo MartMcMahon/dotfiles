@@ -10,10 +10,12 @@ Plugin 'mileszs/ack.vim'
 " Plugin 'w0rp/ale'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
+" Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'omnisharp/omnisharp-vim'
 Plugin 'colepeters/spacemacs-theme.vim'
+Plugin 'srcery-colors/srcery-vim'
 Plugin 'suy/vim-context-commentstring'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'scrooloose/syntastic'
@@ -31,7 +33,6 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'srcery-colors/srcery-vim'
 
 call vundle#end()
 
@@ -47,9 +48,10 @@ endif
 set t_Co=256
 set background=dark
 
-" colorscheme srcery
+colorscheme srcery
+" colorscheme gruvbox
 
-colorscheme spacemacs-theme
+" colorscheme spacemacs-theme
 " highlight Normal ctermbg=NONE
 " highlight nonText ctermbg=NONE
 " }}}
@@ -227,8 +229,10 @@ let g:NERDTreeIndicatorMapCustom = {
   \ "Unknown"   : "?"
   \ }
 " }}}
-"
 
+" Don't show YCM's preview window
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
 
@@ -248,9 +252,9 @@ imap <C-BS> <C-W>
 
 " Ale settings
 " (async eslint'ing)
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+" let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+" let g:ale_sign_warning = '.'
+" let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
 " Emmet-vim settings
 imap <C-Z> <C-Y>,
