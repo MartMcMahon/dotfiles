@@ -8,6 +8,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 " needs a good eslint config
 " Plugin 'w0rp/ale'
+Plugin 'itchyny/calendar.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 " Plugin 'morhetz/gruvbox'
@@ -19,6 +20,7 @@ Plugin 'srcery-colors/srcery-vim'
 Plugin 'suy/vim-context-commentstring'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'scrooloose/syntastic'
+Plugin 'luochen1990/rainbow'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -42,13 +44,13 @@ filetype plugin on
 
 " COLORS {{{
 " colorscheme dracula
-if (has("termguicolors"))
-  set termguicolors
-endif
-set t_Co=256
+" if (has("termguicolors"))
+"   set termguicolors
+" endif
+" set t_Co=256
 set background=dark
 
-colorscheme srcery
+" colorscheme srcery
 " colorscheme gruvbox
 
 " colorscheme spacemacs-theme
@@ -57,14 +59,11 @@ colorscheme srcery
 " }}}
 
 " airline {{{
-let g:airline_theme='base16_spacemacs'
+let g:airline_theme='deus'
 " }}}
 
 " STATUS LINE {{{
 set laststatus=2
-" }}}
-
-" TODOS {{{
 " }}}
 
 " MISC {{{
@@ -89,7 +88,6 @@ set wildignore+=*/node_modules/*
 " }}}
 
 " CtrlP {{{
-
 " Ignore files & folders
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage'
 
@@ -98,7 +96,6 @@ let g:ctrlp_show_hidden = 1
 " }}}
 
 " Git Gutter {{{
-
 " Don't create any key mappings
 let g:gitgutter_map_keys = 0
 " }}}
@@ -259,3 +256,19 @@ imap <C-BS> <C-W>
 " Emmet-vim settings
 imap <C-Z> <C-Y>,
 
+" rainbow config
+let g:rainbow_active = 1
+
+"clojure-static
+let g:clojure_align_multiline_strings=1
+let g:clojure_align_subforms=1
+
+" save folds
+augroup AutoSaveFolds
+  autocmd!
+  " view files are about 500 bytes
+  " bufleave but not bufwinleave captures closing 2nd tab
+  " nested is needed by bufwrite* (if triggered via other autocmd)
+  autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview!
+  autocmd BufWinEnter ?* silent! loadview
+augroup end
