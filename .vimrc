@@ -31,6 +31,7 @@ Plugin 'machakann/vim-highlightedyank'
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 Plugin 'mxw/vim-jsx'
+Plugin 'ledger/vim-ledger'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
@@ -50,26 +51,15 @@ filetype plugin on
 " set t_Co=256
 set background=dark
 
-" colorscheme srcery
-" colorscheme gruvbox
-
 " colorscheme spacemacs-theme
 " highlight Normal ctermbg=NONE
 " highlight nonText ctermbg=NONE
-" }}}
 
-" airline {{{
 let g:airline_theme='deus'
-" }}}
 
-" STATUS LINE {{{
 set laststatus=2
-" }}}
-
-" MISC {{{
-
-" Use the clipboard as the default register
-" set clipboard=unnamed "
+set clipboard=unnamed
+set mouse=a
 
 " Configure backspacing to work 'normally'
 set backspace=indent,eol,start
@@ -125,17 +115,12 @@ set expandtab
 " set lazyredraw          " redraw only when we need to.
 set showcmd             " show command in bottom bar
 
-" Disable mouse
-" set mouse-=a
-
 " Turn on line numbers
 set number
 set relativenumber
 
 " highlight matching [{()}]
 set showmatch
-
-" }}}
 
 " Searching {{{
 set incsearch           " search as characters are entered
