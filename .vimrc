@@ -4,17 +4,22 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+command Sup :echo "ayo"
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 " needs a good eslint config
 " Plugin 'w0rp/ale'
+Plugin 'python/black'
 Plugin 'itchyny/calendar.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 " Plugin 'morhetz/gruvbox'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'omnisharp/omnisharp-vim'
+Plugin 'tmhedberg/SimpylFold'
 Plugin 'colepeters/spacemacs-theme.vim'
 Plugin 'srcery-colors/srcery-vim'
 Plugin 'suy/vim-context-commentstring'
@@ -32,6 +37,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 Plugin 'mxw/vim-jsx'
 Plugin 'ledger/vim-ledger'
+Plugin 'ivanov/vim-ipython'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
@@ -43,18 +49,12 @@ syntax on
 filetype plugin indent on " load filetype-specific indent files
 filetype plugin on
 
-" COLORS {{{
+set background=dark
 " colorscheme dracula
 " if (has("termguicolors"))
 "   set termguicolors
 " endif
-" set t_Co=256
-set background=dark
-
 " colorscheme spacemacs-theme
-" highlight Normal ctermbg=NONE
-" highlight nonText ctermbg=NONE
-
 let g:airline_theme='deus'
 
 set laststatus=2
@@ -75,7 +75,6 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 " Exclude node_modules dir from :vimgrep searches
 set path=**
 set wildignore+=*/node_modules/*
-" }}}
 
 " CtrlP {{{
 " Ignore files & folders
@@ -83,12 +82,10 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage'
 
 " Display hidden files
 let g:ctrlp_show_hidden = 1
-" }}}
 
 " Git Gutter {{{
 " Don't create any key mappings
 let g:gitgutter_map_keys = 0
-" }}}
 
 " Spaces and Tabs {{{
 " Remove trailing whitespace on save
@@ -111,7 +108,6 @@ set softtabstop=2
 set expandtab
 " }}}
 
-" UI Config {{{
 " set lazyredraw          " redraw only when we need to.
 set showcmd             " show command in bottom bar
 
@@ -125,11 +121,6 @@ set showmatch
 " Searching {{{
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
-" turn off search highlight
-"Vim will keep highlighted matches from searches until you either run a new one or manually stop highlighting the old search with :nohlsearch. I find myself running this all the time so I've mapped
-" nnoremap <leader><space> :nohlsearch<CR>
-" nnoremap <esc> :noh<return><esc>
-" }}}
 
 " remap esc
 imap jj <Esc>
@@ -138,20 +129,20 @@ imap jj <Esc>
 nmap <c-w><space> :vsplit<CR>
 nmap <c-w>-     :split<CR>
 
-" Movement {{{
-" Move fast with shift
+" Movement
+" Move fast with ctrl
 nmap <c-j> 3j
 nmap <c-k> 3k
 nmap <c-h> 3h
 nmap <c-l> 3l
 
 " Easier split navigation
-" nmap gh <C-w>h
-" nmap gj <C-w>j
-" nmap gk <C-w>k
-" nmap gl <C-w>l
+nmap gh <C-w>h
+nmap gj <C-w>j
+nmap gk <C-w>k
+nmap gl <C-w>l
 
-" NERDTree {{{
+" NERDTree
 " Automatically delete the buffer of the file you just deleted with NerdTree:
 let NERDTreeAutoDeleteBuffer = 1
 
@@ -168,9 +159,8 @@ let NERDTreeQuitOnOpen = 1
 
 " Toggle Nerd Tree with control + b
 nnoremap <c-b> :NERDTreeToggle<CR>
-" }}}
 
-" Syntastic {{{
+" Syntastic
 " Set up for JS tools
 let g:syntastic_javascript_checkers = ['eslint']
 
@@ -195,9 +185,8 @@ let g:syntastic_mode_map = {
         \ "active_filetypes": [],
         \ "passive_filetypes": [] }
 nmap + :SyntasticCheck<CR>
-" }}}
 
-" NERDTree Git Plugin {{{
+" NERDTree Git Plugin
 let g:NERDTreeIndicatorMapCustom = {
   \ "Modified"  : "♦",
   \ "Staged"    : "♯",
@@ -210,7 +199,6 @@ let g:NERDTreeIndicatorMapCustom = {
   \ 'Ignored'   : 'I',
   \ "Unknown"   : "?"
   \ }
-" }}}
 
 " Don't show YCM's preview window
 set completeopt-=preview
@@ -218,25 +206,22 @@ let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
 
+" shoving this here because formatting
+" autocmd BufWritePost *.py execute ':Black'
+autocmd FileType *.py nnoremap <C-_> :Black<CR>
+
 " JSBeautify {{{
 autocmd FileType javascript noremap <buffer> <C-_> :call JsBeautify()<CR>
 autocmd FileType json noremap <buffer> <C-_> :call JsonBeautify()<CR>
 autocmd FileType jsx noremap <buffer> <C-_> :call JsxBeautify()<CR>
 autocmd FileType html noremap <buffer> <C-_> :call HtmlBeautify()<CR>
 autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
-" }}}
 
 " map enter to insert a new line
 map <CR> i<CR><ESC>l
 
 " map ctrl-backspace to delete previous word in insert mode
-imap <C-BS> <C-W>
-
-" Ale settings
-" (async eslint'ing)
-" let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-" let g:ale_sign_warning = '.'
-" let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+" imap <C-BS> <C-W>
 
 " Emmet-vim settings
 imap <C-Z> <C-Y>,
@@ -257,3 +242,8 @@ augroup AutoSaveFolds
   autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview!
   autocmd BufWinEnter ?* silent! loadview
 augroup end
+
+" jedi-vim
+
+
+let g:jedi#completions_command = "<Leader>s"
