@@ -14,31 +14,36 @@ Plugin 'python/black'
 Plugin 'itchyny/calendar.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
+Plugin 'fisadev/FixedTaskList.vim'
 " Plugin 'morhetz/gruvbox'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'omnisharp/omnisharp-vim'
+Plugin 'python-mode/python-mode'
+Plugin 'luochen1990/rainbow'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'colepeters/spacemacs-theme.vim'
 Plugin 'srcery-colors/srcery-vim'
-Plugin 'suy/vim-context-commentstring'
-Plugin 'lifepillar/vim-solarized8'
 Plugin 'scrooloose/syntastic'
-Plugin 'luochen1990/rainbow'
+Plugin 'majutsushi/tagbar'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tpope/vim-commentary'
+Plugin 'suy/vim-context-commentstring'
 Plugin 'tpope/vim-fugitive'
 Plugin 'machakann/vim-highlightedyank'
+" Plugin 'ivanov/vim-ipython'
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 Plugin 'mxw/vim-jsx'
 Plugin 'ledger/vim-ledger'
-Plugin 'ivanov/vim-ipython'
+" Plugin 'mitsuhiko/vim-python-combined'
+Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'tpope/vim-repeat'
+Plugin 'lifepillar/vim-solarized8'
 Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
 Plugin 'Valloric/YouCompleteMe'
@@ -76,7 +81,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 set path=**
 set wildignore+=*/node_modules/*
 
-" CtrlP {{{
+" CtrlP
 " Ignore files & folders
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage'
 
@@ -91,12 +96,16 @@ let g:gitgutter_map_keys = 0
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
+" use correct indentation for python-mode
+let g:pymode_indent = 0
 " New lines start in better places
-set autoindent
-set smartindent
+" set autoindent
+" set smartindent
+filetype indent on
 
 " Change number of spaces when indenting
 set shiftwidth=2
+au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
 
 " number of visual spaces per TAB
 set tabstop=2
@@ -106,7 +115,6 @@ set softtabstop=2
 
 " tabs are spaces
 set expandtab
-" }}}
 
 " set lazyredraw          " redraw only when we need to.
 set showcmd             " show command in bottom bar
@@ -217,6 +225,9 @@ autocmd FileType jsx noremap <buffer> <C-_> :call JsxBeautify()<CR>
 autocmd FileType html noremap <buffer> <C-_> :call HtmlBeautify()<CR>
 autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
 
+" auto :TagbarToggle with python
+autocmd FileType python :TagbarToggle
+
 " map enter to insert a new line
 map <CR> i<CR><ESC>l
 
@@ -244,6 +255,4 @@ augroup AutoSaveFolds
 augroup end
 
 " jedi-vim
-
-
 let g:jedi#completions_command = "<Leader>s"
