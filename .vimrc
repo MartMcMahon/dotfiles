@@ -102,6 +102,7 @@ let g:pymode_indent = 0
 " set autoindent
 " set smartindent
 filetype indent on
+let g:pymode_options_colorcolumn = 0
 
 " Change number of spaces when indenting
 set shiftwidth=2
@@ -227,6 +228,7 @@ autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
 
 " auto :TagbarToggle with python
 autocmd FileType python :TagbarToggle
+command TT :TagbarToggle
 
 " map enter to insert a new line
 map <CR> i<CR><ESC>l
