@@ -5,7 +5,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 command Sup :echo "ayo"
-
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 " needs a good eslint config
@@ -33,6 +32,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tpope/vim-commentary'
 Plugin 'suy/vim-context-commentstring'
+Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-fugitive'
 Plugin 'machakann/vim-highlightedyank'
 " Plugin 'ivanov/vim-ipython'
@@ -98,6 +98,7 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " use correct indentation for python-mode
 let g:pymode_indent = 0
+let python_pep8_indent_hang_closing = 0
 " New lines start in better places
 " set autoindent
 " set smartindent
@@ -214,6 +215,9 @@ set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
+
+" other syntasic syntax checking options
+let g:pymode_lint_options_pep8 = {'ignore': 'E501'}
 
 " shoving this here because formatting
 " autocmd BufWritePost *.py execute ':Black'
