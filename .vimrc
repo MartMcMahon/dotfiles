@@ -92,7 +92,8 @@ let g:ctrlp_show_hidden = 1
 " Don't create any key mappings
 let g:gitgutter_map_keys = 0
 
-" Spaces and Tabs {{{
+" Spaces and
+" Tabs {{{
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
@@ -108,6 +109,7 @@ let g:pymode_options_colorcolumn = 0
 " Change number of spaces when indenting
 set shiftwidth=2
 au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
+au BufRead,BufNewFile *.js set shiftwidth=2
 
 " number of visual spaces per TAB
 set tabstop=2
@@ -231,7 +233,7 @@ autocmd FileType html noremap <buffer> <C-_> :call HtmlBeautify()<CR>
 autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
 
 " auto :TagbarToggle with python
-autocmd FileType python :TagbarToggle
+" autocmd FileType python :TagbarToggle
 command TT :TagbarToggle
 
 " map enter to insert a new line

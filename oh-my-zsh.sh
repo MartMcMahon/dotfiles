@@ -120,7 +120,6 @@ else
   fi
 fi
 
-
 ## aliases
 alias python=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 alias pip=/Library/Frameworks/Python.framework/Versions/3.7/bin/pip3
