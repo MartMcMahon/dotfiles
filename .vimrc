@@ -88,12 +88,11 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage'
 " Display hidden files
 let g:ctrlp_show_hidden = 1
 
-" Git Gutter {{{
+" Git Gutter
 " Don't create any key mappings
 let g:gitgutter_map_keys = 0
 
-" Spaces and
-" Tabs {{{
+" Spaces and Tabs
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
@@ -120,8 +119,8 @@ set softtabstop=2
 " tabs are spaces
 set expandtab
 
-" set lazyredraw          " redraw only when we need to.
-set showcmd             " show command in bottom bar
+" show command in bottom bar
+set showcmd
 
 " Turn on line numbers
 set number
@@ -130,7 +129,7 @@ set relativenumber
 " highlight matching [{()}]
 set showmatch
 
-" Searching {{{
+" Searching
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 
@@ -162,8 +161,8 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeShowHidden=1
 
 " Don't open NERDTree by default
-let g:nerdtree_tabs_open_on_gui_startup=0
-let g:nerdtree_tabs_open_on_console_startup=0
+" let g:nerdtree_tabs_open_on_gui_startup=0
+" let g:nerdtree_tabs_open_on_console_startup=0
 let NERDTreeIgnore = ['__pycache__', '\.pyc$']
 
 " Close tree once file is selected
@@ -248,7 +247,7 @@ imap <C-Z> <C-Y>,
 " rainbow config
 let g:rainbow_active = 1
 
-"clojure-static
+" clojure-static
 let g:clojure_align_multiline_strings=1
 let g:clojure_align_subforms=1
 
