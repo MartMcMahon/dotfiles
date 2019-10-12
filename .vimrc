@@ -248,14 +248,14 @@ let g:clojure_align_multiline_strings=1
 let g:clojure_align_subforms=1
 
 " save folds
-augroup AutoSaveFolds
-  autocmd!
+" augroup AutoSaveFolds
+"   autocmd!
   " view files are about 500 bytes
   " bufleave but not bufwinleave captures closing 2nd tab
   " nested is needed by bufwrite* (if triggered via other autocmd)
-  autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview!
-  autocmd BufWinEnter ?* silent! loadview
-augroup end
+  " autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview!
+  " autocmd BufWinEnter ?* silent! loadview
+" augroup end
 
 " jedi-vim
 let g:jedi#completions_command = "<Leader>s"
