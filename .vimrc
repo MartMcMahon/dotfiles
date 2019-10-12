@@ -221,8 +221,8 @@ let g:ycm_server_log_level = 'debug'
 let g:pymode_lint_options_pep8 = {'ignore': 'E501'}
 
 " shoving this here because formatting
-" autocmd BufWritePost *.py execute ':Black'
-autocmd FileType *.py nnoremap <C-_> :Black<CR>
+autocmd BufWritePost *.py silent! execute ':Black'
+" autocmd FileType *.py nnoremap <C-_> :Black<CR>
 
 " JSBeautify {{{
 autocmd FileType javascript noremap <buffer> <C-_> :call JsBeautify()<CR>
