@@ -29,13 +29,15 @@ Plugin 'majutsushi/tagbar'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'arzg/vim-corvine'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tpope/vim-commentary'
 Plugin 'suy/vim-context-commentstring'
+Plugin 'tpope/vim-endwise'
 Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-fugitive'
 Plugin 'machakann/vim-highlightedyank'
-" Plugin 'ivanov/vim-ipython'
+Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 Plugin 'mxw/vim-jsx'
@@ -46,7 +48,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 
 call vundle#end()
 
@@ -235,12 +237,6 @@ autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
 " autocmd FileType python :TagbarToggle
 command TT :TagbarToggle
 
-" map enter to insert a new line
-map <CR> i<CR><ESC>l
-
-" map ctrl-backspace to delete previous word in insert mode
-" imap <C-BS> <C-W>
-
 " Emmet-vim settings
 imap <C-Z> <C-Y>,
 
@@ -263,3 +259,11 @@ augroup end
 
 " jedi-vim
 let g:jedi#completions_command = "<Leader>s"
+
+" indent guides
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_color_change_percent = 30
+" let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=237
