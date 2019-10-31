@@ -4,7 +4,6 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-command Sup :echo "ayo"
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 " needs a good eslint config
@@ -14,6 +13,7 @@ Plugin 'itchyny/calendar.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'fisadev/FixedTaskList.vim'
+Plugin 'fountain.vim'
 " Plugin 'morhetz/gruvbox'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/nerdtree'
@@ -106,6 +106,7 @@ let python_pep8_indent_hang_closing = 0
 " set smartindent
 filetype indent on
 let g:pymode_options_colorcolumn = 0
+set nofoldenable
 
 " Change number of spaces when indenting
 set shiftwidth=2
@@ -144,10 +145,10 @@ nmap <c-w>-     :split<CR>
 
 " Movement
 " Move fast with ctrl
-nmap <c-j> 3j
-nmap <c-k> 3k
-nmap <c-h> 3h
-nmap <c-l> 3l
+" nmap <c-j> 3j
+" nmap <c-k> 3k
+" nmap <c-h> 3h
+" nmap <c-l> 3l
 
 " Easier split navigation
 nmap gh <C-w>h
@@ -267,3 +268,28 @@ let g:indent_guides_color_change_percent = 30
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=237
+
+" following are for vim-surround and its insert mode support
+" Allow us to use Ctrl-s and Ctrl-q as keybinds
+silent !stty -ixon
+" Restore default behaviour when leaving Vim.
+autocmd VimLeave * silent !stty ixon
+
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+" stuff for writing
+function Meow()
+  highlight ColorColumn ctermbg=81
+  set cc=80
+  set filetype=text
+endfunction
+
+autocmd BufRead,BufNewFile ~/writing/* call Meow()
+autocmd BufRead,BufNewFile ~/writing/*.fountain set filetype=fountain
+
+" airline word counter
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#wordcount#enabled = 1
+let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
