@@ -106,7 +106,10 @@ let python_pep8_indent_hang_closing = 0
 " set smartindent
 filetype indent on
 let g:pymode_options_colorcolumn = 0
-set nofoldenable
+" set nofoldenable
+set foldmethod=indent
+set foldlevel=2
+set foldnestmax=2
 
 " Change number of spaces when indenting
 set shiftwidth=2
