@@ -48,7 +48,18 @@ Plugin 'tpope/vim-repeat'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
-Plugin 'ycm-core/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe' " this takes a LONG time to install
+
+""" WIP
+" this needs to be installed with a feature branch
+" considering installing vim-plug for this:
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" instead manually switch to the branch with git
+" then `pin` it there
+"""
+" Plugin 'neoclide/coc.nvim', {'pinned': 1}
+" let g:coc_global_extensions = ['coc-python', 'coc-json']
+"""""
 
 call vundle#end()
 
@@ -57,6 +68,7 @@ filetype plugin indent on " load filetype-specific indent files
 filetype plugin on
 " autoclose braces
 inoremap { {}<Left>
+inoremap [ []<Left>
 inoremap ( ()<Left>
 inoremap " ""<Left>
 inoremap ' ''<Left>
