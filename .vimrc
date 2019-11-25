@@ -1,4 +1,4 @@
-set nocompatible
+
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -55,6 +55,11 @@ call vundle#end()
 syntax on
 filetype plugin indent on " load filetype-specific indent files
 filetype plugin on
+" autoclose braces
+inoremap { {}<Left>
+inoremap ( ()<Left>
+inoremap " ""<Left>
+inoremap ' ''<Left>
 
 set background=dark
 " colorscheme dracula
@@ -138,6 +143,9 @@ set showmatch
 " Searching
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
+
+" use \m to remove highlight
+nmap <leader>m :noh<Enter>
 
 " remap esc
 imap jj <Esc>
@@ -293,6 +301,5 @@ autocmd BufRead,BufNewFile ~/writing/* call Meow()
 autocmd BufRead,BufNewFile ~/writing/*.fountain set filetype=fountain
 
 " airline word counter
-let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
