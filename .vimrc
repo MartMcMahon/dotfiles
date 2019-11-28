@@ -101,6 +101,9 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage'
 " Display hidden files
 let g:ctrlp_show_hidden = 1
 
+" Open in mixed mode
+let g:ctrlp_cmd = 'CtrlPMixed'
+
 " Git Gutter
 " Don't create any key mappings
 let g:gitgutter_map_keys = 0
