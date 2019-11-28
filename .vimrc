@@ -66,12 +66,6 @@ call vundle#end()
 syntax on
 filetype plugin indent on " load filetype-specific indent files
 filetype plugin on
-" autoclose braces
-inoremap { {}<Left>
-inoremap [ []<Left>
-inoremap ( ()<Left>
-inoremap " ""<Left>
-inoremap ' ''<Left>
 
 set background=dark
 " colorscheme dracula
@@ -166,13 +160,6 @@ imap jj <Esc>
 nmap <c-w><space> :vsplit<CR>
 nmap <c-w>-     :split<CR>
 
-" Movement
-" Move fast with ctrl
-" nmap <c-j> 3j
-" nmap <c-k> 3k
-" nmap <c-h> 3h
-" nmap <c-l> 3l
-
 " Easier split navigation
 nmap gh <C-w>h
 nmap gj <C-w>j
@@ -187,8 +174,8 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeShowHidden=1
 
 " Don't open NERDTree by default
-" let g:nerdtree_tabs_open_on_gui_startup=0
-" let g:nerdtree_tabs_open_on_console_startup=0
+let g:nerdtree_tabs_open_on_gui_startup=0
+let g:nerdtree_tabs_open_on_console_startup=0
 let NERDTreeIgnore = ['__pycache__', '\.pyc$']
 
 " Close tree once file is selected
@@ -298,18 +285,19 @@ silent !stty -ixon
 " Restore default behaviour when leaving Vim.
 autocmd VimLeave * silent !stty ixon
 
+" change cursor to line when in insert mode
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " stuff for writing
-function Meow()
+function Writing()
   highlight ColorColumn ctermbg=81
   set cc=80
   set filetype=text
 endfunction
 
-autocmd BufRead,BufNewFile ~/writing/* call Meow()
+autocmd BufRead,BufNewFile ~/writing/* call Writing()
 autocmd BufRead,BufNewFile ~/writing/*.fountain set filetype=fountain
 
 " airline word counter
