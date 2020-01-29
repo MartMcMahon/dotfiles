@@ -6,15 +6,12 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
-" needs a good eslint config
-" Plugin 'w0rp/ale'
+Plugin 'dense-analysis/ale'
 Plugin 'python/black'
-Plugin 'itchyny/calendar.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'fisadev/FixedTaskList.vim'
 Plugin 'fountain.vim'
-" Plugin 'morhetz/gruvbox'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -24,13 +21,13 @@ Plugin 'luochen1990/rainbow'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'colepeters/spacemacs-theme.vim'
 Plugin 'srcery-colors/srcery-vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
+Plugin 'ternjs/tern_for_vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'arzg/vim-corvine'
-Plugin 'maksimr/vim-jsbeautify'
+" Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tpope/vim-commentary'
 Plugin 'suy/vim-context-commentstring'
 Plugin 'tpope/vim-endwise'
@@ -42,13 +39,14 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 Plugin 'mxw/vim-jsx'
 Plugin 'ledger/vim-ledger'
+Plugin 'prettier/vim-prettier'
 " Plugin 'mitsuhiko/vim-python-combined'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'tpope/vim-repeat'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
-Plugin 'ycm-core/YouCompleteMe' " this takes a LONG time to install
+" Plugin 'ycm-core/YouCompleteMe' " this takes a LONG time to install
 
 """ WIP
 " this needs to be installed with a feature branch
@@ -74,6 +72,10 @@ set background=dark
 " endif
 " colorscheme spacemacs-theme
 let g:airline_theme='deus'
+
+" move 4 lines at a time
+nnoremap <c-k> 4k
+nnoremap <c-j> 4j
 
 set laststatus=2
 set clipboard=unnamed
@@ -115,16 +117,20 @@ autocmd BufWritePre * %s/\s\+$//e
 " use correct indentation for python-mode
 let g:pymode_indent = 0
 let python_pep8_indent_hang_closing = 0
+let g:pymode_options_colorcolumn = 0
+let g:pymode_lint_options_pep8 = {'ignore': ['E501', 'W503']}
+
 " New lines start in better places
 " set autoindent
 " set smartindent
 filetype indent on
-let g:pymode_options_colorcolumn = 0
 " set nofoldenable
 set foldmethod=indent
 set foldlevel=2
 set foldnestmax=2
 
+au BufRead,BufNewFile *.js set foldmethod=manual
+"
 " Change number of spaces when indenting
 set shiftwidth=2
 au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
@@ -164,10 +170,10 @@ nmap <c-w><space> :vsplit<CR>
 nmap <c-w>-     :split<CR>
 
 " Easier split navigation
-nmap gh <C-w>h
-nmap gj <C-w>j
-nmap gk <C-w>k
-nmap gl <C-w>l
+" nmap gh <C-w>h
+" nmap gj <C-w>j
+" nmap gk <C-w>k
+" nmap gl <C-w>l
 
 " NERDTree
 " Automatically delete the buffer of the file you just deleted with NerdTree:
@@ -189,29 +195,28 @@ nnoremap <c-b> :NERDTreeToggle<CR>
 
 " Syntastic
 " Set up for JS tools
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
 
 " Typescript & vue
-let g:syntastic_typescript_checkers = ['tslint']
-let g:syntastic_vue_checkers = ['tslint', 'eslint']
+" let g:syntastic_typescript_checkers = ['tslint']
+" let g:syntastic_vue_checkers = ['tslint', 'eslint']
 
 " C# / Unity
-let g:syntastic_cs_checkers = ['code_checker']
+" let g:syntastic_cs_checkers = ['code_checker']
 
 " Recommended settings
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = {
-        \ "mode": "passive",
-        \ "active_filetypes": [],
-        \ "passive_filetypes": [] }
-nmap + :SyntasticCheck<CR>
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_mode_map = {
+"         \ "mode": "passive",
+"         \ "active_filetypes": [],
+"         \ "passive_filetypes": [] }
+" nmap + :SyntasticCheck<CR>
 
 " NERDTree Git Plugin
 let g:NERDTreeIndicatorMapCustom = {
@@ -233,23 +238,43 @@ let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
 
-" other syntasic syntax checking options
-let g:pymode_lint_options_pep8 = {'ignore': 'E501'}
-
 " shoving this here because formatting
 autocmd BufWritePost *.py silent! execute ':Black'
-" autocmd FileType *.py nnoremap <C-_> :Black<CR>
+" disable it for specific projects
+autocmd BufNewFile,BufRead ~/code/exclaim/**/*.py autocmd! BufWritePost
 
-" JSBeautify {{{
-autocmd FileType javascript noremap <buffer> <C-_> :call JsBeautify()<CR>
-autocmd FileType json noremap <buffer> <C-_> :call JsonBeautify()<CR>
-autocmd FileType jsx noremap <buffer> <C-_> :call JsxBeautify()<CR>
-autocmd FileType html noremap <buffer> <C-_> :call HtmlBeautify()<CR>
-autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
+" JSBeautify
+" autocmd FileType javascript noremap <buffer> <C-_> :call JsBeautify()<CR>
+" autocmd FileType json noremap <buffer> <C-_> :call JsonBeautify()<CR>
+" autocmd FileType jsx noremap <buffer> <C-_> :call JsxBeautify()<CR>
+" autocmd FileType html noremap <buffer> <C-_> :call HtmlBeautify()<CR>
+" autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
+
+" switched to prettier
+" autocmd nnoremap <buffer> <C-_> :call Prettier
+nnoremap <C-_> :Prettier<CR>
 
 " auto :TagbarToggle with python
 " autocmd FileType python :TagbarToggle
 command TT :TagbarToggle
+" tagbar with js
+let g:tagbar_type_javascript = {
+\ 'ctagstype': 'javascript',
+\ 'kinds': [
+\ 'A:arrays',
+\ 'P:properties',
+\ 'T:tags',
+\ 'O:objects',
+\ 'G:generator functions',
+\ 'F:functions',
+\ 'C:constructors/classes',
+\ 'M:methods',
+\ 'V:variables',
+\ 'I:imports',
+\ 'E:exports',
+\ 'S:styled components'
+\ ]
+\ }
 
 " Emmet-vim settings
 imap <C-Z> <C-Y>,
@@ -262,14 +287,10 @@ let g:clojure_align_multiline_strings=1
 let g:clojure_align_subforms=1
 
 " save folds
-" augroup AutoSaveFolds
-"   autocmd!
-  " view files are about 500 bytes
-  " bufleave but not bufwinleave captures closing 2nd tab
-  " nested is needed by bufwrite* (if triggered via other autocmd)
-  " autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview!
-  " autocmd BufWinEnter ?* silent! loadview
-" augroup end
+augroup AutoSaveFolds
+  au BufWinLeave,BufLeave,BufWritePost ~/code/datavend/**/* mkview
+  au BufWinEnter ~/code/datavend/**/* silent! loadview
+augroup end
 
 " jedi-vim
 let g:jedi#completions_command = "<Leader>s"
@@ -306,3 +327,8 @@ autocmd BufRead,BufNewFile ~/writing/*.fountain set filetype=fountain
 " airline word counter
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
+
+" ale
+let g:ale_linters = {'css': ['eslint'], 'jsx': ['prettier'], 'javascript': ['prettier'], 'python': ['black']}
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let g:ale_fix_on_save = 1
