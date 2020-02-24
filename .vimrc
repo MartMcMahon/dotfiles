@@ -17,7 +17,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'omnisharp/omnisharp-vim'
 Plugin 'python-mode/python-mode'
 Plugin 'luochen1990/rainbow'
-Plugin 'tmhedberg/SimpylFold'
+" Plugin 'tmhedberg/SimpylFold'
 Plugin 'colepeters/spacemacs-theme.vim'
 Plugin 'srcery-colors/srcery-vim'
 Plugin 'vim-syntastic/syntastic'
@@ -27,7 +27,6 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'arzg/vim-corvine'
-" Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tpope/vim-commentary'
 Plugin 'suy/vim-context-commentstring'
 Plugin 'tpope/vim-endwise'
@@ -126,12 +125,10 @@ let g:pymode_lint_options_pep8 = {'ignore': ['E501', 'W503']}
 " set smartindent
 filetype indent on
 " set nofoldenable
-set foldmethod=indent
+set foldmethod=marker
 set foldlevel=2
 set foldnestmax=2
 
-au BufRead,BufNewFile *.js set foldmethod=manual
-"
 " Change number of spaces when indenting
 set shiftwidth=2
 au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
@@ -169,12 +166,6 @@ imap jj <Esc>
 " windows
 nmap <c-w><space> :vsplit<CR>
 nmap <c-w>-     :split<CR>
-
-" Easier split navigation
-" nmap gh <C-w>h
-" nmap gj <C-w>j
-" nmap gk <C-w>k
-" nmap gl <C-w>l
 
 " NERDTree
 " Automatically delete the buffer of the file you just deleted with NerdTree:
@@ -244,14 +235,7 @@ autocmd BufWritePost *.py silent! execute ':Black'
 " disable it for specific projects
 autocmd BufNewFile,BufRead ~/code/exclaim/**/*.py autocmd! BufWritePost
 
-" JSBeautify
-" autocmd FileType javascript noremap <buffer> <C-_> :call JsBeautify()<CR>
-" autocmd FileType json noremap <buffer> <C-_> :call JsonBeautify()<CR>
-" autocmd FileType jsx noremap <buffer> <C-_> :call JsxBeautify()<CR>
-" autocmd FileType html noremap <buffer> <C-_> :call HtmlBeautify()<CR>
-" autocmd FileType css noremap <buffer> <C-_> :call CSSBeautify()<CR>
-
-" switched to prettier
+" prettier
 " autocmd nnoremap <buffer> <C-_> :call Prettier
 nnoremap <C-_> :Prettier<CR>
 
@@ -287,11 +271,11 @@ let g:rainbow_active = 1
 let g:clojure_align_multiline_strings=1
 let g:clojure_align_subforms=1
 
-" save folds
-augroup AutoSaveFolds
-  au BufWinLeave,BufLeave,BufWritePost ~/code/datavend/**/* mkview
-  au BufWinEnter ~/code/datavend/**/* silent! loadview
-augroup end
+" " save folds
+" augroup AutoSaveFolds
+"   au BufWinLeave,BufLeave,BufWritePost ~/code/datavend/**/* mkview
+"   au BufWinEnter ~/code/datavend/**/* silent! loadview
+" augroup end
 
 " jedi-vim
 let g:jedi#completions_command = "<Leader>s"
@@ -333,3 +317,5 @@ let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 
 let g:ale_linters = {'css': ['eslint'], 'jsx': ['prettier'], 'javascript': ['prettier'], 'python': ['black']}
 let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
 let g:ale_fix_on_save = 1
+
+
