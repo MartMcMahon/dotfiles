@@ -1,4 +1,3 @@
-
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -21,6 +20,7 @@ Plugin 'luochen1990/rainbow'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'colepeters/spacemacs-theme.vim'
 Plugin 'srcery-colors/srcery-vim'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'leafgarland/typescript-vim'
@@ -41,7 +41,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'ledger/vim-ledger'
 Plugin 'prettier/vim-prettier'
 " Plugin 'mitsuhiko/vim-python-combined'
-Plugin 'Vimjas/vim-python-pep8-indent'
+" Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'tpope/vim-repeat'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'tpope/vim-surround'
@@ -115,6 +115,7 @@ let g:gitgutter_map_keys = 0
 autocmd BufWritePre * %s/\s\+$//e
 
 " use correct indentation for python-mode
+let g:pymode_python = 'python3'
 let g:pymode_indent = 0
 let python_pep8_indent_hang_closing = 0
 let g:pymode_options_colorcolumn = 0
