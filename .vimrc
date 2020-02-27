@@ -37,6 +37,7 @@ Plug 'tpope/vim-repeat'
 Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
+Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 
