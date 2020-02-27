@@ -1,75 +1,46 @@
-filetype off
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'mileszs/ack.vim'
+Plug 'dense-analysis/ale'
+Plug 'python/black'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/emmet-vim'
+Plug 'fisadev/FixedTaskList.vim'
+Plug 'vim-scripts/fountain.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'omnisharp/omnisharp-vim'
+Plug 'martmcmahon/python-mode'
+Plug 'luochen1990/rainbow'
+Plug 'colepeters/spacemacs-theme.vim'
+Plug 'srcery-colors/srcery-vim'
+Plug 'majutsushi/tagbar'
+Plug 'ternjs/tern_for_vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'arzg/vim-corvine'
+Plug 'tpope/vim-commentary'
+Plug 'suy/vim-context-commentstring'
+Plug 'tpope/vim-endwise'
+Plug 'nvie/vim-flake8'
+Plug 'tpope/vim-fugitive'
+Plug 'machakann/vim-highlightedyank'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
+Plug 'mxw/vim-jsx'
+Plug 'ledger/vim-ledger'
+Plug 'prettier/vim-prettier'
+Plug 'tpope/vim-repeat'
+Plug 'lifepillar/vim-solarized8'
+Plug 'tpope/vim-surround'
+Plug 'posva/vim-vue'
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'dense-analysis/ale'
-Plugin 'python/black'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'fisadev/FixedTaskList.vim'
-Plugin 'fountain.vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'omnisharp/omnisharp-vim'
-Plugin 'python-mode/python-mode'
-Plugin 'luochen1990/rainbow'
-" Plugin 'tmhedberg/SimpylFold'
-Plugin 'colepeters/spacemacs-theme.vim'
-Plugin 'srcery-colors/srcery-vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'majutsushi/tagbar'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'arzg/vim-corvine'
-Plugin 'tpope/vim-commentary'
-Plugin 'suy/vim-context-commentstring'
-Plugin 'tpope/vim-endwise'
-Plugin 'nvie/vim-flake8'
-Plugin 'tpope/vim-fugitive'
-Plugin 'machakann/vim-highlightedyank'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'pangloss/vim-javascript'
-Plugin 'elzr/vim-json'
-Plugin 'mxw/vim-jsx'
-Plugin 'ledger/vim-ledger'
-Plugin 'prettier/vim-prettier'
-" Plugin 'mitsuhiko/vim-python-combined'
-" Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'tpope/vim-repeat'
-Plugin 'lifepillar/vim-solarized8'
-Plugin 'tpope/vim-surround'
-Plugin 'posva/vim-vue'
-" Plugin 'ycm-core/YouCompleteMe' " this takes a LONG time to install
-
-""" WIP
-" this needs to be installed with a feature branch
-" considering installing vim-plug for this:
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" instead manually switch to the branch with git
-" then `pin` it there
-"""
-" Plugin 'neoclide/coc.nvim', {'pinned': 1}
-" let g:coc_global_extensions = ['coc-python', 'coc-json']
-"""""
-
-call vundle#end()
-
-syntax on
-filetype plugin indent on " load filetype-specific indent files
-filetype plugin on
+call plug#end()
 
 set background=dark
-" colorscheme dracula
-" if (has("termguicolors"))
-"   set termguicolors
-" endif
-" colorscheme spacemacs-theme
 let g:airline_theme='deus'
 
 " move 4 lines at a time
@@ -113,18 +84,15 @@ let g:gitgutter_map_keys = 0
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
-" use correct indentation for python-mode
+" use correct indentation for python-mode {{{
 let g:pymode_python = 'python3'
 let g:pymode_indent = 0
 let python_pep8_indent_hang_closing = 0
 let g:pymode_options_colorcolumn = 0
 let g:pymode_lint_options_pep8 = {'ignore': ['E501', 'W503']}
+" }}}
 
-" New lines start in better places
-" set autoindent
-" set smartindent
 filetype indent on
-" set nofoldenable
 set foldmethod=marker
 set foldlevel=2
 set foldnestmax=2
@@ -167,7 +135,7 @@ imap jj <Esc>
 nmap <c-w><space> :vsplit<CR>
 nmap <c-w>-     :split<CR>
 
-" NERDTree
+" NERDTree {{{
 " Automatically delete the buffer of the file you just deleted with NerdTree:
 let NERDTreeAutoDeleteBuffer = 1
 
@@ -184,33 +152,13 @@ let NERDTreeQuitOnOpen = 1
 
 " Toggle Nerd Tree with control + b
 nnoremap <c-b> :NERDTreeToggle<CR>
-
-" Syntastic
-" Set up for JS tools
-" let g:syntastic_javascript_checkers = ['eslint']
-
-" Typescript & vue
-" let g:syntastic_typescript_checkers = ['tslint']
-" let g:syntastic_vue_checkers = ['tslint', 'eslint']
-
-" C# / Unity
-" let g:syntastic_cs_checkers = ['code_checker']
+" }}}
 
 " Recommended settings
 set statusline+=%#warningmsg#
 set statusline+=%*
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_mode_map = {
-"         \ "mode": "passive",
-"         \ "active_filetypes": [],
-"         \ "passive_filetypes": [] }
-" nmap + :SyntasticCheck<CR>
-
-" NERDTree Git Plugin
+" NERDTree Git Plugin {{{
 let g:NERDTreeIndicatorMapCustom = {
   \ "Modified"  : "♦",
   \ "Staged"    : "♯",
@@ -223,6 +171,7 @@ let g:NERDTreeIndicatorMapCustom = {
   \ 'Ignored'   : 'I',
   \ "Unknown"   : "?"
   \ }
+" }}}
 
 " Don't show YCM's preview window
 set completeopt-=preview
@@ -236,7 +185,6 @@ autocmd BufWritePost *.py silent! execute ':Black'
 autocmd BufNewFile,BufRead ~/code/exclaim/**/*.py autocmd! BufWritePost
 
 " prettier
-" autocmd nnoremap <buffer> <C-_> :call Prettier
 nnoremap <C-_> :Prettier<CR>
 
 " auto :TagbarToggle with python
@@ -262,7 +210,7 @@ let g:tagbar_type_javascript = {
 \ }
 
 " Emmet-vim settings
-imap <C-Z> <C-Y>,
+" imap <C-Z> <C-Y>,
 
 " rainbow config
 let g:rainbow_active = 1
@@ -270,12 +218,6 @@ let g:rainbow_active = 1
 " clojure-static
 let g:clojure_align_multiline_strings=1
 let g:clojure_align_subforms=1
-
-" " save folds
-" augroup AutoSaveFolds
-"   au BufWinLeave,BufLeave,BufWritePost ~/code/datavend/**/* mkview
-"   au BufWinEnter ~/code/datavend/**/* silent! loadview
-" augroup end
 
 " jedi-vim
 let g:jedi#completions_command = "<Leader>s"
@@ -294,12 +236,13 @@ silent !stty -ixon
 " Restore default behaviour when leaving Vim.
 autocmd VimLeave * silent !stty ixon
 
-" change cursor to line when in insert mode
+" change cursor to line when in insert mode {{{
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" }}}
 
-" stuff for writing
+" stuff for writing {{{
 function Writing()
   highlight ColorColumn ctermbg=81
   set cc=80
@@ -308,14 +251,13 @@ endfunction
 
 autocmd BufRead,BufNewFile ~/writing/* call Writing()
 autocmd BufRead,BufNewFile ~/writing/*.fountain set filetype=fountain
-
 " airline word counter
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
+" }}}
 
-" ale
+" ale {{{
 let g:ale_linters = {'css': ['eslint'], 'jsx': ['prettier'], 'javascript': ['prettier'], 'python': ['black']}
 let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
 let g:ale_fix_on_save = 1
-
-
+" }}}
