@@ -1,17 +1,14 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/mart/.oh-my-zsh"
+export ZSH="/Users/martmcmahon/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="agnoster"
-# ZSH_THEME="fino"
-ZSH_THEME="maran"
-# ZSH_THEME="random"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -65,12 +62,8 @@ ZSH_THEME="maran"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  # zsh-dircolors-solarized
-)
+plugins=(git)
 
-eval `dircolors ~/.oh-my-zsh/custom/plugins/zsh-dircolors-solarized/dircolors-solarized/dircolors.256dark`
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -101,3 +94,20 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias l="ls -alh"
+
+export VISUAL=vim
+
+bindkey -v
+function zle-line-init zle-keymap-select {
+  RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+  RPS2=$RPS1
+  zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+export wokewonk="157.230.236.13"
+export aninterestingplace="157.230.236.13"
