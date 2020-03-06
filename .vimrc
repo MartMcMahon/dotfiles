@@ -1,16 +1,17 @@
 call plug#begin('~/.vim/plugged')
-
+" {{{
 Plug 'mileszs/ack.vim'
 Plug 'dense-analysis/ale'
 Plug 'python/black'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mattn/emmet-vim'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'omnisharp/omnisharp-vim'
+" cloned python-mode because of a breaking bug
+" having to do with version 3 I think?
 Plug 'martmcmahon/python-mode'
 Plug 'luochen1990/rainbow'
 Plug 'colepeters/spacemacs-theme.vim'
@@ -40,6 +41,7 @@ Plug 'posva/vim-vue'
 Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
+" }}}
 
 set background=dark
 let g:airline_theme='deus'
@@ -192,27 +194,6 @@ nnoremap <C-_> :Prettier<CR>
 " auto :TagbarToggle with python
 " autocmd FileType python :TagbarToggle
 command TT :TagbarToggle
-" tagbar with js
-let g:tagbar_type_javascript = {
-\ 'ctagstype': 'javascript',
-\ 'kinds': [
-\ 'A:arrays',
-\ 'P:properties',
-\ 'T:tags',
-\ 'O:objects',
-\ 'G:generator functions',
-\ 'F:functions',
-\ 'C:constructors/classes',
-\ 'M:methods',
-\ 'V:variables',
-\ 'I:imports',
-\ 'E:exports',
-\ 'S:styled components'
-\ ]
-\ }
-
-" Emmet-vim settings
-" imap <C-Z> <C-Y>,
 
 " rainbow config
 let g:rainbow_active = 1
