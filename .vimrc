@@ -38,7 +38,7 @@ Plug 'tpope/vim-repeat'
 Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
-Plug 'ycm-core/YouCompleteMe'
+" Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 " }}}
@@ -60,10 +60,6 @@ set backspace=indent,eol,start
 " Delay after typing stops before checking again (used by gitgutter).
 " Can cause issues under 1000ms
 set updatetime=250
-
-" Trying to escape escape delays
-set noesckeys
-set timeout timeoutlen=1000 ttimeoutlen=100
 
 " Exclude node_modules dir from :vimgrep searches
 set path=**
