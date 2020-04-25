@@ -3,10 +3,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'dense-analysis/ale'
 Plug 'python/black'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
-Plug 'davidhalter/jedi-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'omnisharp/omnisharp-vim'
@@ -25,7 +25,6 @@ Plug 'arzg/vim-corvine'
 Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-endwise'
-Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-fugitive'
 Plug 'machakann/vim-highlightedyank'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -38,13 +37,12 @@ Plug 'tpope/vim-repeat'
 Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
-" Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 " }}}
 
 set background=dark
-let g:airline_theme='deus'
+" let g:airline_theme='deus'
 
 " move 4 lines at a time
 nnoremap <c-k> 4k
@@ -173,14 +171,9 @@ let g:NERDTreeIndicatorMapCustom = {
   \ }
 " }}}
 
-" Don't show YCM's preview window
-set completeopt-=preview
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_server_log_level = 'debug'
-
 " shoving this here because formatting
 autocmd BufWritePost *.py silent! execute ':Black'
+
 " disable it for specific projects
 autocmd BufNewFile,BufRead ~/code/exclaim/**/*.py autocmd! BufWritePost
 
@@ -197,9 +190,6 @@ let g:rainbow_active = 1
 " clojure-static
 let g:clojure_align_multiline_strings=1
 let g:clojure_align_subforms=1
-
-" jedi-vim
-let g:jedi#completions_command = "<Leader>s"
 
 " indent guides
 let g:indent_guides_auto_colors = 0
@@ -235,8 +225,62 @@ let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
 " }}}
 
-" ale {{{
-let g:ale_linters = {'css': ['eslint'], 'jsx': ['prettier'], 'javascript': ['prettier'], 'python': ['black']}
-let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
-let g:ale_fix_on_save = 1
+""" coc config {{{
+" don't use on python files. We got Kite for that
+autocmd BufNew,BufEnter *.py execute "silent! CocDisable"
+autocmd BufLeave *.py execute "silent! CocEnable"
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" " delays and poor user experience.
+set updatetime=300
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+     \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+""" Highlight the symbol and its references when holding the cursor.
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+" complete_info()["selected"] != "-1" ? "\o" : "\\
+
+" " Symbol renaming.
+" nmap <leader>rn <Plug>(coc-rename)
+
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " }}}
+
+" ale configuration
+nmap <silent> [c <Plug>(ale_previous_wrap)
+nmap <silent> ]c <Plug>(ale_next_wrap)
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
