@@ -38,8 +38,6 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 
-Plug 'ParamagicDev/vim-medic_chalk'
-
 call plug#end()
 " }}}
 
@@ -51,10 +49,8 @@ set background=dark
 " PmenuSel – selected item
 " PmenuSbar – scrollbar
 " PmenuThumb – thumb of the scrollbar
-" highlight Pmenu guibg=#CBE0FF guifg=darkgrey
+highlight Pmenu ctermbg=cyan
 " highlight PmenuSel guibg=#496F8A guifg=white
-
-colorscheme medic_chalk
 
 " move 4 lines at a time
 nnoremap <c-k> 4k
