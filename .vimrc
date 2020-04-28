@@ -38,11 +38,23 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 
+Plug 'ParamagicDev/vim-medic_chalk'
+
 call plug#end()
 " }}}
 
 set background=dark
 " let g:airline_theme='deus'
+
+" background of popup menu
+" Pmenu – normal item
+" PmenuSel – selected item
+" PmenuSbar – scrollbar
+" PmenuThumb – thumb of the scrollbar
+" highlight Pmenu guibg=#CBE0FF guifg=darkgrey
+" highlight PmenuSel guibg=#496F8A guifg=white
+
+colorscheme medic_chalk
 
 " move 4 lines at a time
 nnoremap <c-k> 4k
