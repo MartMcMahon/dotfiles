@@ -53,11 +53,11 @@ set background=dark
 highlight Pmenu ctermbg=cyan
 highlight PmenuSel ctermfg=white
 
-" move 4 lines at a time
-nnoremap <c-k> 4k
-nnoremap <c-j> 4j
 let g:colorizer_auto_filetype='css,scss,html'
 
+" remap window scrolling
+nnoremap <c-k> <c-y>
+nnoremap <c-j> <c-e>
 
 set laststatus=2
 set clipboard=unnamed
