@@ -4,6 +4,7 @@ Plug 'mileszs/ack.vim'
 Plug 'dense-analysis/ale'
 Plug 'python/black'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
@@ -50,11 +51,13 @@ set background=dark
 " PmenuSbar – scrollbar
 " PmenuThumb – thumb of the scrollbar
 highlight Pmenu ctermbg=cyan
-" highlight PmenuSel guibg=#496F8A guifg=white
+highlight PmenuSel ctermfg=white
 
 " move 4 lines at a time
 nnoremap <c-k> 4k
 nnoremap <c-j> 4j
+let g:colorizer_auto_filetype='css,scss,html'
+
 
 set laststatus=2
 set clipboard=unnamed
@@ -94,7 +97,7 @@ let g:pymode_python = 'python3'
 let g:pymode_indent = 0
 let python_pep8_indent_hang_closing = 0
 let g:pymode_options_colorcolumn = 0
-let g:pymode_lint_options_pep8 = {'ignore': ['E501', 'W503']}
+let g:pymode_lint_options_pep8 = {'ignore': ['E501', 'F841', 'W503']}
 let g:pymode_rope = 0
 " }}}
 
@@ -232,6 +235,13 @@ autocmd BufRead,BufNewFile ~/writing/*.fountain set filetype=fountain
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
 " }}}
+
+"" kite options
+set completeopt+=menuone
+set completeopt-=preview
+set completeopt+=noinsert
+let g:kite_tab_complete = 1
+let g:kite_log=1
 
 """ coc config {{{
 " don't use on python files. We got Kite for that
