@@ -33,6 +33,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'ledger/vim-ledger'
+Plug 'nixon/vim-vmath'
 Plug 'jceb/vim-orgmode'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-repeat'
@@ -41,6 +42,9 @@ Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 
 call plug#end()
+
+" :packadd termdebug
+" :Termdebug
 
 set background=dark
 set termguicolors
@@ -203,7 +207,7 @@ nnoremap <C-_> :Prettier<CR>
 
 " auto :TagbarToggle with python
 " autocmd FileType python :TagbarToggle
-command TT :TagbarToggle
+command! TT :TagbarToggle
 
 " rainbow config
 let g:rainbow_active = 1
@@ -233,7 +237,7 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " }}}
 
 " stuff for writing {{{
-function Writing()
+function! Writing()
   highlight ColorColumn ctermbg=81
   set cc=80
   set filetype=text
@@ -308,3 +312,7 @@ nmap <silent> [c <Plug>(ale_previous_wrap)
 nmap <silent> ]c <Plug>(ale_next_wrap)
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
+
+" vmath
+vmap <expr>  ++  VMATH_YankAndAnalyse()
+nmap         ++  vip++
