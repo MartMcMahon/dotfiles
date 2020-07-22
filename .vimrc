@@ -1,5 +1,4 @@
 call plug#begin('~/.vim/plugged')
-" {{{
 Plug 'mileszs/ack.vim'
 Plug 'dense-analysis/ale'
 Plug 'python/black'
@@ -25,6 +24,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'arzg/vim-corvine'
 Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring'
+Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'machakann/vim-highlightedyank'
@@ -33,6 +33,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'ledger/vim-ledger'
+Plug 'jceb/vim-orgmode'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-repeat'
 Plug 'lifepillar/vim-solarized8'
@@ -40,10 +41,19 @@ Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 
 call plug#end()
-" }}}
 
 set background=dark
-" let g:airline_theme='deus'
+set termguicolors
+colorscheme deep-space
+let g:deepspace_italics=1
+" let g:airline_theme='deep_space'
+let g:airline_theme='deus'
+
+" comments in italics
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+highlight Comment cterm=italic gui=italic
+
 
 " background of popup menu
 " Pmenu – normal item
@@ -102,7 +112,7 @@ let g:pymode_rope = 0
 " }}}
 
 filetype indent on
-set foldmethod=marker
+" set foldmethod=marker
 set foldlevel=2
 set foldnestmax=2
 
