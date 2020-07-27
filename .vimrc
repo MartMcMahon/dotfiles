@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'dense-analysis/ale'
-Plug 'python/black'
+Plug 'psf/black', { 'tag': '19.10b0' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -14,9 +14,7 @@ Plug 'omnisharp/omnisharp-vim'
 " having to do with version 3 I think?
 Plug 'martmcmahon/python-mode'
 Plug 'luochen1990/rainbow'
-Plug 'colepeters/spacemacs-theme.vim'
 Plug 'srcery-colors/srcery-vim'
-Plug 'majutsushi/tagbar'
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'vim-airline/vim-airline'
@@ -37,14 +35,10 @@ Plug 'nixon/vim-vmath'
 Plug 'jceb/vim-orgmode'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-repeat'
-Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 
 call plug#end()
-
-" :packadd termdebug
-" :Termdebug
 
 set background=dark
 set termguicolors
@@ -57,7 +51,6 @@ let g:airline_theme='deus'
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 highlight Comment cterm=italic gui=italic
-
 
 " background of popup menu
 " Pmenu – normal item
@@ -216,13 +209,13 @@ let g:rainbow_active = 1
 let g:clojure_align_multiline_strings=1
 let g:clojure_align_subforms=1
 
-" indent guides
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_color_change_percent = 30
+" " indent guides
+" let g:indent_guides_auto_colors = 1
+" let g:indent_guides_color_change_percent = 30
 " let g:indent_guides_guide_size = 1
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=237
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=6
 
 " following are for vim-surround and its insert mode support
 " Allow us to use Ctrl-s and Ctrl-q as keybinds
@@ -305,8 +298,6 @@ xmap <silent> <TAB> <Plug>(coc-range-select)
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" }}}
-
 " ale configuration
 nmap <silent> [c <Plug>(ale_previous_wrap)
 nmap <silent> ]c <Plug>(ale_next_wrap)
@@ -316,3 +307,13 @@ let g:ale_sign_warning = '⚠️'
 " vmath
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
+
+" fun! ShowFuncName()
+"   let lnum = line(".")
+"   let col = col(".")
+"   echohl ModeMsg
+"   echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
+"   echohl None
+"   call search("\\%" . lnum . "l" . "\\%" . col . "c")
+" endfun
+" map f :call ShowFuncName() <CR>
