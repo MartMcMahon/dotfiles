@@ -38,6 +38,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 
+
+Plug 'mbadran/jpythonfold.vim'
+
 call plug#end()
 
 set background=dark
@@ -307,13 +310,3 @@ let g:ale_sign_warning = '⚠️'
 " vmath
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
-
-" fun! ShowFuncName()
-"   let lnum = line(".")
-"   let col = col(".")
-"   echohl ModeMsg
-"   echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
-"   echohl None
-"   call search("\\%" . lnum . "l" . "\\%" . col . "c")
-" endfun
-" map f :call ShowFuncName() <CR>
