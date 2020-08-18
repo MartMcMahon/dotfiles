@@ -310,3 +310,6 @@ let g:ale_sign_warning = '⚠️'
 " vmath
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
+
+" leave terminal mode
+tnoremap <Leader>n <C-\><C-n>
