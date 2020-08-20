@@ -38,8 +38,21 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 
-
+" experimental
 Plug 'mbadran/jpythonfold.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'tweekmonster/impsort.vim'
+
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+
+" NOTE: you need to install completion sources to get completions. Check
+" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-jedi'
 
 call plug#end()
 
@@ -102,24 +115,30 @@ let g:gitgutter_map_keys = 0
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
-" use correct indentation for python-mode {{{
+""""""""" python settings """""""""" {{{
+" use correct indentation for python-mode
 let g:pymode_python = 'python3'
 let g:pymode_indent = 0
 let python_pep8_indent_hang_closing = 0
 let g:pymode_options_colorcolumn = 0
 let g:pymode_lint_options_pep8 = {'ignore': ['E501', 'F841', 'W503']}
 let g:pymode_rope = 0
-" }}}
 
-filetype indent on
-" set foldmethod=marker
-set foldlevel=2
-set foldnestmax=2
+" don't use coc on python files.
+autocmd BufNew,BufEnter *.py execute "silent! CocDisable"
+autocmd BufLeave *.py execute "silent! CocEnable"
 
 " Change number of spaces when indenting
 set shiftwidth=2
 au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
 au BufRead,BufNewFile *.js set shiftwidth=2
+
+" black formatting
+autocmd BufWritePre *.py silent! execute ':Black'
+filetype indent on
+" set foldmethod=marker
+set foldlevel=2
+set foldnestmax=2
 
 " number of visual spaces per TAB
 set tabstop=2
@@ -177,13 +196,6 @@ nnoremap <c-b> :NERDTreeToggle<CR>
 set statusline+=%#warningmsg#
 set statusline+=%*
 
-
-" shoving this here because formatting
-autocmd BufWritePost *.py silent! execute ':Black'
-
-" disable it for specific projects
-autocmd BufNewFile,BufRead ~/code/exclaim/**/*.py autocmd! BufWritePost
-
 " prettier
 nnoremap <C-_> :Prettier<CR>
 
@@ -197,14 +209,6 @@ let g:rainbow_active = 1
 " clojure-static
 let g:clojure_align_multiline_strings=1
 let g:clojure_align_subforms=1
-
-" " indent guides
-" let g:indent_guides_auto_colors = 1
-" let g:indent_guides_color_change_percent = 30
-" let g:indent_guides_guide_size = 1
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=6
 
 " following are for vim-surround and its insert mode support
 " Allow us to use Ctrl-s and Ctrl-q as keybinds
@@ -230,19 +234,6 @@ autocmd BufRead,BufNewFile ~/writing/*.fountain set filetype=fountain
 " airline word counter
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
-" }}}
-
-"" kite options
-set completeopt+=menuone
-set completeopt-=preview
-set completeopt+=noinsert
-let g:kite_tab_complete = 1
-let g:kite_log=1
-
-""" coc config {{{
-" don't use on python files. We got Kite for that
-autocmd BufNew,BufEnter *.py execute "silent! CocDisable"
-autocmd BufLeave *.py execute "silent! CocEnable"
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -251,34 +242,25 @@ set hidden
 " " delays and poor user experience.
 set updatetime=300
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-     \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+" """"""" autocomplete settings """""""
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=menuone,noselect,longest
+inoremap <expr><TAB> pumvisible() ? "\<lt>Down>" : "<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+"   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+"   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
+""""""""''"" coc config """"""""""
 " " Symbol renaming.
 " nmap <leader>rn <Plug>(coc-rename)
 
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
 nmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <TAB> <Plug>(coc-range-select)
 
