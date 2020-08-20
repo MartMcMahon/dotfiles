@@ -135,6 +135,10 @@ au BufRead,BufNewFile *.js set shiftwidth=2
 
 " black formatting
 autocmd BufWritePre *.py silent! execute ':Black'
+
+" impsort experinment
+autocmd BufWritePre *.py ImpSort!
+
 filetype indent on
 " set foldmethod=marker
 set foldlevel=2
