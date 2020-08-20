@@ -177,20 +177,6 @@ nnoremap <c-b> :NERDTreeToggle<CR>
 set statusline+=%#warningmsg#
 set statusline+=%*
 
-" NERDTree Git Plugin {{{
-let g:NERDTreeIndicatorMapCustom = {
-  \ "Modified"  : "♦",
-  \ "Staged"    : "♯",
-  \ "Untracked" : "♠",
-  \ "Renamed"   : "♣",
-  \ "Unmerged"  : "♪",
-  \ "Deleted"   : "-",
-  \ "Dirty"     : "☼",
-  \ "Clean"     : "♫",
-  \ 'Ignored'   : 'I',
-  \ "Unknown"   : "?"
-  \ }
-" }}}
 
 " shoving this here because formatting
 autocmd BufWritePost *.py silent! execute ':Black'
