@@ -50,9 +50,14 @@ Plug 'roxma/nvim-yarp'
 
 " NOTE: you need to install completion sources to get completions. Check
 " our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-bufword'        " words in buffer
+Plug 'ncm2/ncm2-path'           " relative path files
+Plug 'ncm2/ncm2-jedi'           " python
+Plug 'ncm2/ncm2-cssomni'        " css
+Plug 'ncm2/ncm2-tern'           " js
+" Plug 'svermeulen/ncm2-yoink'    " yoinks
+" Plug 'filipekiss/ncm2-look.vim' " an english dictionary
+" could be handy if I get into writing
 
 call plug#end()
 
@@ -276,8 +281,15 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " ale configuration
 nmap <silent> [c <Plug>(ale_previous_wrap)
 nmap <silent> ]c <Plug>(ale_next_wrap)
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
+let g:ale_sign_error = '💢'
+let g:ale_sign_warning = '🔸'
+" 🔸
+" 🔴
+" 🈲
+" ❕
+" 💢
+" ⚠️'
+" ❌
 
 " vmath
 vmap <expr>  ++  VMATH_YankAndAnalyse()
