@@ -45,8 +45,12 @@ Plug 'tweekmonster/impsort.vim'
 
 Plug 'jiangmiao/auto-pairs'
 
+Plug 'jceb/vim-orgmode'
+
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-lua-ftplugin'
 
 " NOTE: you need to install completion sources to get completions. Check
 " our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
@@ -58,6 +62,8 @@ Plug 'ncm2/ncm2-tern'           " js
 " Plug 'svermeulen/ncm2-yoink'    " yoinks
 " Plug 'filipekiss/ncm2-look.vim' " an english dictionary
 " could be handy if I get into writing
+
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
@@ -182,7 +188,7 @@ imap jj <Esc>
 nmap <c-w><space> :vsplit<CR>
 nmap <c-w>-     :split<CR>
 
-" NERDTree {{{
+" NERDTree
 " Automatically delete the buffer of the file you just deleted with NerdTree:
 let NERDTreeAutoDeleteBuffer = 1
 
@@ -199,7 +205,6 @@ let NERDTreeQuitOnOpen = 1
 
 " Toggle Nerd Tree with control + b
 nnoremap <c-b> :NERDTreeToggle<CR>
-" }}}
 
 " Recommended settings
 set statusline+=%#warningmsg#
