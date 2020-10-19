@@ -124,5 +124,9 @@ zle -N zle-keymap-select
 
 export wokewonk="157.230.236.13"
 export aninterestingplace="157.230.236.13"
+
+# the fuck auto-correcter
+eval $(thefuck --alias)
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
