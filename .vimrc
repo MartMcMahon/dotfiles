@@ -1,8 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
-" Plug 'dense-analysis/ale'
 Plug 'psf/black', { 'tag': '19.10b0' }
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/FixedTaskList.vim'
@@ -14,7 +12,6 @@ Plug 'omnisharp/omnisharp-vim'
 " having to do with version 3 I think?
 Plug 'martmcmahon/python-mode'
 Plug 'luochen1990/rainbow'
-" Plug 'srcery-colors/srcery-vim'
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
 
@@ -59,7 +56,6 @@ Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-misc'
 
 Plug 'prabirshrestha/vim-lsp'
-" Plug 'mattn/vim-lsp-settings'
 
 Plug 'davisdude/vim-love-docs'
 
