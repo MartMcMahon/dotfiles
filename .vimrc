@@ -1,8 +1,8 @@
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'psf/black', { 'tag': '19.10b0' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/FixedTaskList.vim'
@@ -14,9 +14,12 @@ Plug 'omnisharp/omnisharp-vim'
 " having to do with version 3 I think?
 Plug 'martmcmahon/python-mode'
 Plug 'luochen1990/rainbow'
-Plug 'srcery-colors/srcery-vim'
+" Plug 'srcery-colors/srcery-vim'
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
+
+Plug 'neovim/nvim-lspconfig'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'arzg/vim-corvine'
@@ -35,6 +38,7 @@ Plug 'nixon/vim-vmath'
 Plug 'jceb/vim-orgmode'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-repeat'
+Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 
@@ -49,8 +53,15 @@ Plug 'jceb/vim-orgmode'
 
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
-Plug 'xolox/vim-misc'
+Plug 'nvim-lua/completion-nvim'
+Plug 'tbastos/vim-lua'
 Plug 'xolox/vim-lua-ftplugin'
+Plug 'xolox/vim-misc'
+
+Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
+
+Plug 'davisdude/vim-love-docs'
 
 " NOTE: you need to install completion sources to get completions. Check
 " our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
@@ -62,8 +73,6 @@ Plug 'ncm2/ncm2-tern'           " js
 " Plug 'svermeulen/ncm2-yoink'    " yoinks
 " Plug 'filipekiss/ncm2-look.vim' " an english dictionary
 " could be handy if I get into writing
-
-Plug 'mhinz/vim-startify'
 
 call plug#end()
 
@@ -198,7 +207,7 @@ let NERDTreeShowHidden=1
 " Don't open NERDTree by default
 let g:nerdtree_tabs_open_on_gui_startup=0
 let g:nerdtree_tabs_open_on_console_startup=0
-let NERDTreeIgnore = ['__pycache__', '\.pyc$']
+let NERDTreeIgnore = ['__pycache__', '\.pyc$', 'node_modules']
 
 " Close tree once file is selected
 let NERDTreeQuitOnOpen = 1
