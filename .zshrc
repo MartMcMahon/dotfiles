@@ -19,7 +19,10 @@ export ZSH="/Users/martmcmahon/.oh-my-zsh"
 # ZSH_THEME='miloshadzic'
 # ZSH_THEME='minimal'
 # ZSH_THEME="spaceship"
+# ZSH_THEME="sorin"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -101,32 +104,31 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias l="ls -alh"
 alias vim="nvim -O"
 alias ldfs='ls -A | l | grep "^-.\+ \..\+"'
 
+alias pip="python -m pip"
+
 export VISUAL=vim
 
 bindkey -v
-function zle-line-init zle-keymap-select {
-  RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-  RPS2=$RPS1
-  zle reset-prompt
-}
+# function zle-line-init zle-keymap-select {
+  # RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+  # RPS2=$RPS1
+  # VIMODE="${${KEYMAP/vicmd/n}/(main|viins)/i}"
+  # zle reset-prompt
+# }
 
 zle -N zle-line-init
 zle -N zle-keymap-select
 
 export wokewonk="157.230.236.13"
 export aninterestingplace="157.230.236.13"
+# export ec2="34.214.138.134"
 
 # the fuck auto-correcter
 eval $(thefuck --alias)
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# alias aws="ssh -i ~/.ssh/ec2.pem ubuntu@$ec2"

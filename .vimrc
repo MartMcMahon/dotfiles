@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'psf/black', { 'tag': '19.10b0' }
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -14,9 +15,7 @@ Plug 'martmcmahon/python-mode'
 Plug 'luochen1990/rainbow'
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
-
 Plug 'neovim/nvim-lspconfig'
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'arzg/vim-corvine'
@@ -31,6 +30,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'ledger/vim-ledger'
+Plug 'prabirshrestha/vim-lsp'
 Plug 'nixon/vim-vmath'
 Plug 'jceb/vim-orgmode'
 Plug 'prettier/vim-prettier'
@@ -44,21 +44,21 @@ Plug 'mbadran/jpythonfold.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'tweekmonster/impsort.vim'
 
-Plug 'jiangmiao/auto-pairs'
-
 Plug 'jceb/vim-orgmode'
 
-Plug 'ncm2/ncm2'
+""""""" lua
 Plug 'roxma/nvim-yarp'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tbastos/vim-lua'
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-misc'
-
-Plug 'prabirshrestha/vim-lsp'
-
 Plug 'davisdude/vim-love-docs'
 
+
+Plug 'alvan/vim-closetag'
+
+"""""""" NCM2
+Plug 'ncm2/ncm2'
 " NOTE: you need to install completion sources to get completions. Check
 " our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
 Plug 'ncm2/ncm2-bufword'        " words in buffer
@@ -141,8 +141,8 @@ let g:pymode_lint_options_pep8 = {'ignore': ['E501', 'F841', 'W503']}
 let g:pymode_rope = 0
 
 " don't use coc on python files.
-autocmd BufNew,BufEnter *.py execute "silent! CocDisable"
-autocmd BufLeave *.py execute "silent! CocEnable"
+" autocmd BufNew,BufEnter *.py execute "silent! CocDisable"
+" autocmd BufLeave *.py execute "silent! CocEnable"
 
 " Change number of spaces when indenting
 set shiftwidth=2
@@ -280,13 +280,13 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+" nmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " ale configuration
 nmap <silent> [c <Plug>(ale_previous_wrap)
@@ -307,3 +307,7 @@ nmap         ++  vip++
 
 " leave terminal mode
 tnoremap <Leader>n <C-\><C-n>
+
+
+" closetag config
+let g:closetag_filenames = '*.html,*.js,*.ts'
