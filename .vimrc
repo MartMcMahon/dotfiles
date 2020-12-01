@@ -137,7 +137,8 @@ let g:pymode_python = 'python3'
 let g:pymode_indent = 0
 let python_pep8_indent_hang_closing = 0
 let g:pymode_options_colorcolumn = 0
-let g:pymode_lint_options_pep8 = {'ignore': ['E501', 'F841', 'W503']}
+let g:pymode_lint_options_pep8 = {'ignore': ['E402', 'E501', 'F841', 'W503']}
+let g:pymode_lint_options_mccabe = {'ignore': ['C901']}
 let g:pymode_rope = 0
 
 " Change number of spaces when indenting
