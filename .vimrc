@@ -28,7 +28,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
-Plug 'mxw/vim-jsx'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ledger/vim-ledger'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'nixon/vim-vmath'
@@ -139,10 +139,6 @@ let python_pep8_indent_hang_closing = 0
 let g:pymode_options_colorcolumn = 0
 let g:pymode_lint_options_pep8 = {'ignore': ['E501', 'F841', 'W503']}
 let g:pymode_rope = 0
-
-" don't use coc on python files.
-" autocmd BufNew,BufEnter *.py execute "silent! CocDisable"
-" autocmd BufLeave *.py execute "silent! CocEnable"
 
 " Change number of spaces when indenting
 set shiftwidth=2
@@ -268,25 +264,6 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=menuone,noselect,longest
 inoremap <expr><TAB> pumvisible() ? "\<lt>Down>" : "<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-"   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-"   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-""""""""''"" coc config """"""""""
-" " Symbol renaming.
-" nmap <leader>rn <Plug>(coc-rename)
-
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" nmap <silent> <TAB> <Plug>(coc-range-select)
-" xmap <silent> <TAB> <Plug>(coc-range-select)
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " ale configuration
 nmap <silent> [c <Plug>(ale_previous_wrap)
