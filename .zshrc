@@ -111,6 +111,8 @@ alias ldfs='ls -A | l | grep "^-.\+ \..\+"'
 
 alias pip="python -m pip"
 
+alias :q='echo "sir, this is an arby'\''s"'
+
 export VISUAL=vim
 
 bindkey -v
@@ -124,11 +126,7 @@ bindkey -v
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-export wokewonk="157.230.236.13"
-export aninterestingplace="157.230.236.13"
-# export ec2="34.214.138.134"
+export pi="192.168.1.135"
 
 # the fuck auto-correcter
 eval $(thefuck --alias)
-
-# alias aws="ssh -i ~/.ssh/ec2.pem ubuntu@$ec2"

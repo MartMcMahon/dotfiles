@@ -18,6 +18,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'alvan/vim-closetag'
 Plug 'arzg/vim-corvine'
 Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring'
@@ -39,6 +40,9 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 
+" ed/emmet-vim/
+" - /Users/martmcmahon/.vim/plugged/vim-jsx/
+
 " experimental
 Plug 'mbadran/jpythonfold.vim'
 Plug 'davidhalter/jedi-vim'
@@ -54,9 +58,7 @@ Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-misc'
 Plug 'davisdude/vim-love-docs'
 
-
-Plug 'alvan/vim-closetag'
-
+"
 """""""" NCM2
 Plug 'ncm2/ncm2'
 " NOTE: you need to install completion sources to get completions. Check
@@ -69,6 +71,8 @@ Plug 'ncm2/ncm2-tern'           " js
 " Plug 'svermeulen/ncm2-yoink'    " yoinks
 " Plug 'filipekiss/ncm2-look.vim' " an english dictionary
 " could be handy if I get into writing
+
+Plug 'dansomething/vim-hackernews'
 
 call plug#end()
 
@@ -114,14 +118,11 @@ set path=**
 set wildignore+=*/node_modules/*
 
 " CtrlP
-" Ignore files & folders
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage'
-
-" Display hidden files
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage\|lib\|__pychache__\|build'
 let g:ctrlp_show_hidden = 1
-
-" Open in mixed mode
 let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_user_command = 'find %s -type f'
 
 " Git Gutter
 " Don't create any key mappings
@@ -288,4 +289,4 @@ tnoremap <Leader>n <C-\><C-n>
 
 
 " closetag config
-let g:closetag_filenames = '*.html,*.js,*.ts'
+let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
