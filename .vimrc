@@ -24,6 +24,7 @@ Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'tpope/vim-endwise'
+Plug 'davidyorr/vim-es6-unused-imports'
 Plug 'tpope/vim-fugitive'
 Plug 'machakann/vim-highlightedyank'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -182,7 +183,7 @@ set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 
 " use \m to remove highlight
-nmap <leader>m :noh<Enter>
+nmap <leader>m :noh<CR>:ES6ImportsHightlight<CR>
 
 " remap esc
 imap jj <Esc>
@@ -290,3 +291,8 @@ tnoremap <Leader>n <C-\><C-n>
 
 " closetag config
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
+
+" check for unused node imports
+autocmd BufWinEnter *.js execute "ES6ImportsHighlight"
+autocmd BufWritePost *.js execute "ES6ImportsHighlight"
+let g:es6_imports_excludes = ['React']
