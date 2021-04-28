@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'psf/black', { 'tag': '19.10b0' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/FixedTaskList.vim'
@@ -11,11 +12,12 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'omnisharp/omnisharp-vim'
 " cloned python-mode because of a breaking bug
 " having to do with version 3 I think?
-Plug 'martmcmahon/python-mode'
+" Plug 'martmcmahon/python-mode'
+Plug 'python-mode/python-mode'
 Plug 'luochen1990/rainbow'
+Plug 'rust-lang/rust.vim'
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'neovim/nvim-lspconfig'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'alvan/vim-closetag'
@@ -26,13 +28,13 @@ Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'tpope/vim-endwise'
 Plug 'davidyorr/vim-es6-unused-imports'
 Plug 'tpope/vim-fugitive'
+Plug 'ruanyl/vim-gh-line'
 Plug 'machakann/vim-highlightedyank'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ledger/vim-ledger'
-Plug 'prabirshrestha/vim-lsp'
 Plug 'nixon/vim-vmath'
 Plug 'jceb/vim-orgmode'
 Plug 'prettier/vim-prettier'
@@ -40,13 +42,20 @@ Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
-
 " ed/emmet-vim/
 " - /Users/martmcmahon/.vim/plugged/vim-jsx/
 
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
 " experimental
 Plug 'mbadran/jpythonfold.vim'
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 Plug 'tweekmonster/impsort.vim'
 
 Plug 'jceb/vim-orgmode'
@@ -54,6 +63,7 @@ Plug 'jceb/vim-orgmode'
 """"""" lua
 Plug 'roxma/nvim-yarp'
 Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'tbastos/vim-lua'
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-misc'
@@ -71,10 +81,6 @@ Plug 'ncm2/ncm2-cssomni'        " css
 Plug 'ncm2/ncm2-tern'           " js
 " Plug 'svermeulen/ncm2-yoink'    " yoinks
 " Plug 'filipekiss/ncm2-look.vim' " an english dictionary
-" could be handy if I get into writing
-
-Plug 'dansomething/vim-hackernews'
-
 call plug#end()
 
 set background=dark
@@ -99,6 +105,9 @@ highlight PmenuSel ctermfg=white
 
 let g:colorizer_auto_filetype='css,scss,html'
 
+" allows switching buffers with unsaved changes
+set hidden
+
 " remap window scrolling
 nnoremap <c-k> <c-y>
 nnoremap <c-j> <c-e>
@@ -119,7 +128,7 @@ set path=**
 set wildignore+=*/node_modules/*
 
 " CtrlP
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage\|lib\|__pychache__\|build'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage\|lib\|__pychache__\|build|target\'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
@@ -154,6 +163,8 @@ autocmd BufWritePre *.py silent! execute ':Black'
 " impsort experinment
 autocmd BufWritePre *.py ImpSort!
 
+syntax enable
+filetype plugin indent on
 filetype indent on
 " set foldmethod=marker
 set foldlevel=2
@@ -183,7 +194,7 @@ set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 
 " use \m to remove highlight
-nmap <leader>m :noh<CR>:ES6ImportsHightlight<CR>
+nmap <leader>m :noh<CR>
 
 " remap esc
 imap jj <Esc>
@@ -238,9 +249,8 @@ autocmd VimLeave * silent !stty ixon
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" }}}
 
-" stuff for writing {{{
+" stuff for writing
 function! Writing()
   highlight ColorColumn ctermbg=81
   set cc=80
@@ -251,10 +261,8 @@ autocmd BufRead,BufNewFile ~/writing/* call Writing()
 autocmd BufRead,BufNewFile ~/writing/*.fountain set filetype=fountain
 " airline word counter
 let g:airline#extensions#wordcount#enabled = 1
-let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
+let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'md', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
 
-" TextEdit might fail if hidden is not set.
-set hidden
 
 " " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " " delays and poor user experience.
@@ -268,26 +276,8 @@ set completeopt=menuone,noselect,longest
 inoremap <expr><TAB> pumvisible() ? "\<lt>Down>" : "<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" ale configuration
-nmap <silent> [c <Plug>(ale_previous_wrap)
-nmap <silent> ]c <Plug>(ale_next_wrap)
-let g:ale_sign_error = '💢'
-let g:ale_sign_warning = '🔸'
-" 🔸
-" 🔴
-" 🈲
-" ❕
-" 💢
-" ⚠️'
-" ❌
-
-" vmath
-vmap <expr>  ++  VMATH_YankAndAnalyse()
-nmap         ++  vip++
-
 " leave terminal mode
 tnoremap <Leader>n <C-\><C-n>
-
 
 " closetag config
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
@@ -296,3 +286,21 @@ let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
 autocmd BufWinEnter *.js execute "ES6ImportsHighlight"
 autocmd BufWritePost *.js execute "ES6ImportsHighlight"
 let g:es6_imports_excludes = ['React']
+
+" rust config
+let g:rustfmt_autosave = 1
+
+" typescript lsp
+" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
+let g:coc_global_extensions = [
+  \ 'coc-tsserver'
+  \ ]
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
+" tooltip
+nnoremap <silent> K :call CocAction('doHover')<CR>
+
