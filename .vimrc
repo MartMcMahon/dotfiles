@@ -15,6 +15,7 @@ Plug 'luochen1990/rainbow'
 Plug 'rust-lang/rust.vim'
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'puremourning/vimspector'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'alvan/vim-closetag'
@@ -224,13 +225,6 @@ nnoremap <c-b> :NERDTreeToggle<CR>
 " Recommended settings
 set statusline+=%#warningmsg#
 set statusline+=%*
-
-" prettier
-nnoremap <C-_> :Prettier<CR>
-
-" auto :TagbarToggle with python
-" autocmd FileType python :TagbarToggle
-command! TT :TagbarToggle
 
 " rainbow config
 let g:rainbow_active = 1
