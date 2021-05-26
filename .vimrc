@@ -10,9 +10,6 @@ Plug 'vim-scripts/fountain.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'omnisharp/omnisharp-vim'
-" cloned python-mode because of a breaking bug
-" having to do with version 3 I think?
-" Plug 'martmcmahon/python-mode'
 Plug 'python-mode/python-mode'
 Plug 'luochen1990/rainbow'
 Plug 'rust-lang/rust.vim'
@@ -36,7 +33,7 @@ Plug 'elzr/vim-json'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ledger/vim-ledger'
 Plug 'nixon/vim-vmath'
-Plug 'jceb/vim-orgmode'
+" Plug 'jceb/vim-orgmode'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
@@ -57,8 +54,11 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mbadran/jpythonfold.vim'
 " Plug 'davidhalter/jedi-vim'
 Plug 'tweekmonster/impsort.vim'
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-Plug 'jceb/vim-orgmode'
 
 """"""" lua
 Plug 'roxma/nvim-yarp'
@@ -304,3 +304,8 @@ endif
 " tooltip
 nnoremap <silent> K :call CocAction('doHover')<CR>
 
+" telescope mappings
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+highlight TelescopeSelection guifg=#ffffff gui=bold
