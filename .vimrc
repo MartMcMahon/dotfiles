@@ -12,7 +12,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'omnisharp/omnisharp-vim'
 Plug 'python-mode/python-mode'
 Plug 'luochen1990/rainbow'
-Plug 'rust-lang/rust.vim'
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'puremourning/vimspector'
@@ -43,7 +42,11 @@ Plug 'posva/vim-vue'
 " ed/emmet-vim/
 " - /Users/martmcmahon/.vim/plugged/vim-jsx/
 
-" LSP
+"""" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'ron-rs/ron.vim'
+
+"" LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'prabirshrestha/vim-lsp'
 " Plug 'prabirshrestha/asyncomplete.vim'
