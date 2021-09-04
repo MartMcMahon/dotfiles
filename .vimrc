@@ -32,24 +32,21 @@ Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ledger/vim-ledger'
-Plug 'nixon/vim-vmath'
 " Plug 'jceb/vim-orgmode'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
-Plug 'posva/vim-vue'
 " ed/emmet-vim/
 " - /Users/martmcmahon/.vim/plugged/vim-jsx/
 
 """" Rust
+Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
 Plug 'ron-rs/ron.vim'
 
 "" LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'prabirshrestha/vim-lsp'
-" Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -63,7 +60,6 @@ Plug 'tweekmonster/impsort.vim'
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-
 """"""" lua
 Plug 'roxma/nvim-yarp'
 Plug 'nvim-lua/completion-nvim'
@@ -73,7 +69,6 @@ Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-misc'
 Plug 'davisdude/vim-love-docs'
 
-"
 """""""" NCM2
 Plug 'ncm2/ncm2'
 " NOTE: you need to install completion sources to get completions. Check
@@ -170,32 +165,27 @@ autocmd BufWritePre *.py ImpSort!
 syntax enable
 filetype plugin indent on
 filetype indent on
+
+" preview window at bottom
+set splitbelow
 " set foldmethod=marker
 set foldlevel=2
 set foldnestmax=2
-
-" number of visual spaces per TAB
 set tabstop=2
-
 " number of spaces in tab when editing
 set softtabstop=2
-
-" tabs are spaces
 set expandtab
-
-" show command in bottom bar
 set showcmd
-
 " Turn on line numbers
 set number
 set relativenumber
-
 " highlight matching [{()}]
 set showmatch
-
 " Searching
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
+" local .vimrc
+set exrc
 
 " use \m to remove highlight
 nmap <leader>m :noh<CR>
@@ -286,6 +276,9 @@ let g:es6_imports_excludes = ['React']
 
 " rust config
 let g:rustfmt_autosave = 1
+" As-you-type autocomplete
+set completeopt=menu,menuone,preview,noselect,noinsert
+let g:ale_completion_enabled = 1
 
 " typescript lsp
 " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
@@ -301,8 +294,3 @@ endif
 " tooltip
 nnoremap <silent> K :call CocAction('doHover')<CR>
 
-" telescope mappings
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-highlight TelescopeSelection guifg=#ffffff gui=bold
