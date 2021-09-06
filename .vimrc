@@ -37,8 +37,6 @@ Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
-" ed/emmet-vim/
-" - /Users/martmcmahon/.vim/plugged/vim-jsx/
 
 """" Rust
 Plug 'dense-analysis/ale'
@@ -167,7 +165,7 @@ filetype plugin indent on
 filetype indent on
 
 " preview window at bottom
-set splitbelow
+" set splitbelow
 " set foldmethod=marker
 set foldlevel=2
 set foldnestmax=2
@@ -250,7 +248,6 @@ autocmd BufRead,BufNewFile ~/writing/*.fountain set filetype=fountain
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 'md', 'mail', 'markdown', 'org', 'rst', 'tex', 'text']
 
-
 " " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " " delays and poor user experience.
 set updatetime=300
@@ -259,7 +256,8 @@ set updatetime=300
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=menuone,noselect,longest
+" set completeopt=menuone,noselect,longest
+set completeopt=menu,menuone,longest,noselect
 inoremap <expr><TAB> pumvisible() ? "\<lt>Down>" : "<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
@@ -277,7 +275,6 @@ let g:es6_imports_excludes = ['React']
 " rust config
 let g:rustfmt_autosave = 1
 " As-you-type autocomplete
-set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
 
 " typescript lsp
@@ -293,4 +290,3 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
 endif
 " tooltip
 nnoremap <silent> K :call CocAction('doHover')<CR>
-
