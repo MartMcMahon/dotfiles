@@ -73,7 +73,7 @@ Plug 'ncm2/ncm2'
 " our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
 Plug 'ncm2/ncm2-bufword'        " words in buffer
 Plug 'ncm2/ncm2-path'           " relative path files
-Plug 'ncm2/ncm2-jedi'           " python
+" Plug 'ncm2/ncm2-jedi'           " python
 Plug 'ncm2/ncm2-cssomni'        " css
 Plug 'ncm2/ncm2-tern'           " js
 " Plug 'svermeulen/ncm2-yoink'    " yoinks
