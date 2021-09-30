@@ -11,6 +11,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'omnisharp/omnisharp-vim'
 Plug 'python-mode/python-mode'
+Plug 'vim-python/python-syntax'
 Plug 'luochen1990/rainbow'
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
@@ -21,7 +22,6 @@ Plug 'alvan/vim-closetag'
 Plug 'arzg/vim-corvine'
 Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring'
-Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'tpope/vim-endwise'
 Plug 'davidyorr/vim-es6-unused-imports'
 Plug 'tpope/vim-fugitive'
@@ -38,8 +38,13 @@ Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
 
+""" Colors
+" Plug 'tyrannicaltoucan/vim-deep-space'
+" Plug 'ghifarit53/tokyonight-vim'
+Plug 'NLKNguyen/papercolor-theme'
+
 """" Rust
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
 Plug 'ron-rs/ron.vim'
 
@@ -82,10 +87,23 @@ call plug#end()
 
 set background=dark
 set termguicolors
-colorscheme deep-space
-let g:deepspace_italics=1
-" let g:airline_theme='deep_space'
-let g:airline_theme='deus'
+set t_Co=256   " This is may or may not needed.
+colorscheme PaperColor
+let g:airline_theme='papercolor'
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': {
+  \       'transparent_background': 1,
+  \       'allow_bold': 1,
+  \       'allow_italic': 1,
+  \     },
+  \   },
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins': 1
+  \     }
+  \   }
+  \ }
 
 " comments in italics
 let &t_ZH="\e[3m"
@@ -148,6 +166,7 @@ let g:pymode_options_colorcolumn = 0
 let g:pymode_lint_options_pep8 = {'ignore': ['E402', 'E501', 'F841', 'W503']}
 let g:pymode_lint_options_mccabe = {'ignore': ['C901']}
 let g:pymode_rope = 0
+let g:python_highlight_all = 1
 
 " Change number of spaces when indenting
 set shiftwidth=2
@@ -290,3 +309,5 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
 endif
 " tooltip
 nnoremap <silent> K :call CocAction('doHover')<CR>
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
