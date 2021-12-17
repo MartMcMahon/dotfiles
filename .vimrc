@@ -38,11 +38,6 @@ Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
 
-""" Colors
-" Plug 'tyrannicaltoucan/vim-deep-space'
-" Plug 'ghifarit53/tokyonight-vim'
-Plug 'NLKNguyen/papercolor-theme'
-
 """" Rust
 " Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
@@ -83,27 +78,33 @@ Plug 'ncm2/ncm2-cssomni'        " css
 Plug 'ncm2/ncm2-tern'           " js
 " Plug 'svermeulen/ncm2-yoink'    " yoinks
 " Plug 'filipekiss/ncm2-look.vim' " an english dictionary
+
+""" Colors
+Plug 'ghifarit53/tokyonight-vim'
+" Plug 'NLKNguyen/papercolor-theme'
+" Plug 'dracula/vim', {'name': 'dracula'}
+
 call plug#end()
 
 set background=dark
-set termguicolors
-set t_Co=256   " This is may or may not needed.
-colorscheme PaperColor
-let g:airline_theme='papercolor'
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.dark': {
-  \       'transparent_background': 1,
-  \       'allow_bold': 1,
-  \       'allow_italic': 1,
-  \     },
-  \   },
-  \   'language': {
-  \     'python': {
-  \       'highlight_builtins': 1
-  \     }
-  \   }
-  \ }
+" set termguicolors
+" set t_Co=256   " This is may or may not needed.
+colorscheme tokyonight
+let g:airline_theme='tokyonight'
+" let g:PaperColor_Theme_Options = {
+"   \   'theme': {
+"   \     'default.dark': {
+"   \       'transparent_background': 1,
+"   \       'allow_bold': 1,
+"   \       'allow_italic': 1,
+"   \     },
+"   \   },
+"   \   'language': {
+"   \     'python': {
+"   \       'highlight_builtins': 1
+"   \     }
+"   \   }
+"   \ }
 
 " comments in italics
 let &t_ZH="\e[3m"
@@ -136,7 +137,7 @@ set backspace=indent,eol,start
 
 " Delay after typing stops before checking again (used by gitgutter).
 " Can cause issues under 1000ms
-set updatetime=250
+" set updatetime=400
 
 " Exclude node_modules dir from :vimgrep searches
 set path=**
