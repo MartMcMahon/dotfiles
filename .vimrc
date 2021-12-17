@@ -205,6 +205,7 @@ set hlsearch            " highlight matches
 " local .vimrc
 set exrc
 
+map <Space> <Leader>
 " use \m to remove highlight
 nmap <leader>m :noh<CR>
 
