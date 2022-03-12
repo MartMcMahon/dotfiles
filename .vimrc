@@ -4,9 +4,10 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'psf/black', { 'tag': '19.10b0' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chrisbra/Colorizer'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'omnisharp/omnisharp-vim'
@@ -143,13 +144,6 @@ set backspace=indent,eol,start
 set path=**
 set wildignore+=*/node_modules/*
 
-" CtrlP
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|coverage\|lib\|__pychache__\|build|target\'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_user_command = 'find %s -type f'
-
 " Git Gutter
 " Don't create any key mappings
 let g:gitgutter_map_keys = 0
@@ -157,6 +151,9 @@ let g:gitgutter_map_keys = 0
 " Spaces and Tabs
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
+
+" ctrl-p opens fzf buffers
+nnoremap <c-p> :Buffers<cr>
 
 """"""""" python settings """""""""" {{{
 " use correct indentation for python-mode
