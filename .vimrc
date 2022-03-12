@@ -51,7 +51,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " experimental
 Plug 'mbadran/jpythonfold.vim'
-" Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 Plug 'tweekmonster/impsort.vim'
 " Plug 'nvim-lua/popup.nvim'
 " Plug 'nvim-lua/plenary.nvim'
@@ -68,14 +68,14 @@ Plug 'xolox/vim-misc'
 Plug 'davisdude/vim-love-docs'
 
 """""""" NCM2
-Plug 'ncm2/ncm2'
+" Plug 'ncm2/ncm2'
 " NOTE: you need to install completion sources to get completions. Check
 " our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
-Plug 'ncm2/ncm2-bufword'        " words in buffer
-Plug 'ncm2/ncm2-path'           " relative path files
+" Plug 'ncm2/ncm2-bufword'        " words in buffer
+" Plug 'ncm2/ncm2-path'           " relative path files
 " Plug 'ncm2/ncm2-jedi'           " python
-Plug 'ncm2/ncm2-cssomni'        " css
-Plug 'ncm2/ncm2-tern'           " js
+" Plug 'ncm2/ncm2-cssomni'        " css
+" Plug 'ncm2/ncm2-tern'           " js
 " Plug 'svermeulen/ncm2-yoink'    " yoinks
 " Plug 'filipekiss/ncm2-look.vim' " an english dictionary
 
@@ -116,7 +116,7 @@ highlight Comment cterm=italic gui=italic
 " PmenuSel – selected item
 " PmenuSbar – scrollbar
 " PmenuThumb – thumb of the scrollbar
-highlight Pmenu ctermbg=cyan
+" highlight Pmenu ctermbg=cyan
 highlight PmenuSel ctermfg=white
 
 let g:colorizer_auto_filetype='css,scss,html'
@@ -275,7 +275,7 @@ set updatetime=300
 
 " """"""" autocomplete settings """""""
 " enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+" autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANT: :help Ncm2PopupOpen for more information
 " set completeopt=menuone,noselect,longest
 set completeopt=menu,menuone,longest,noselect
