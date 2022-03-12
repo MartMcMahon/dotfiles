@@ -43,6 +43,7 @@ Plug 'tpope/vim-surround'
 " Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
 Plug 'ron-rs/ron.vim'
+Plug 'mhinz/vim-crates'
 
 "" LSP
 Plug 'neovim/nvim-lspconfig'
@@ -294,6 +295,7 @@ let g:es6_imports_excludes = ['React']
 let g:rustfmt_autosave = 1
 " As-you-type autocomplete
 let g:ale_completion_enabled = 1
+autocmd BufRead Cargo.toml call crates#toggle()
 
 " typescript lsp
 " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
