@@ -1,8 +1,9 @@
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'psf/black', { 'tag': '19.10b0' }
+Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'chrisbra/Colorizer'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
@@ -54,7 +55,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " experimental
 Plug 'mbadran/jpythonfold.vim'
 Plug 'davidhalter/jedi-vim'
-Plug 'tweekmonster/impsort.vim'
+" Plug 'tweekmonster/impsort.vim'
 " Plug 'nvim-lua/popup.nvim'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
@@ -176,7 +177,7 @@ au BufRead,BufNewFile *.js set shiftwidth=2
 autocmd BufWritePre *.py silent! execute ':Black'
 
 " impsort experinment
-autocmd BufWritePre *.py ImpSort!
+" autocmd BufWritePre *.py ImpSort!
 
 syntax enable
 filetype plugin indent on
