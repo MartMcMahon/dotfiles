@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
+Plug 'psf/black'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'chrisbra/Colorizer'
