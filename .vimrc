@@ -45,6 +45,10 @@ Plug 'tpope/vim-surround'
 Plug 'rust-lang/rust.vim'
 Plug 'ron-rs/ron.vim'
 Plug 'mhinz/vim-crates'
+Plug 'simrat39/rust-tools.nvim'
+" Debugging
+Plug 'nvim-lua/plenary.nvim'
+Plug 'mfussenegger/nvim-dap'
 
 "" LSP
 Plug 'neovim/nvim-lspconfig'
@@ -66,7 +70,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'tbastos/vim-lua'
-Plug 'xolox/vim-lua-ftplugin'
+" Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-misc'
 Plug 'davisdude/vim-love-docs'
 
@@ -297,6 +301,7 @@ let g:rustfmt_autosave = 1
 " As-you-type autocomplete
 let g:ale_completion_enabled = 1
 autocmd BufRead Cargo.toml call crates#toggle()
+luafile ~/.vim.lua
 
 " typescript lsp
 " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
