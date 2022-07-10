@@ -1,3 +1,5 @@
+require("nvim-lsp-installer").setup {}
+local nvim_lsp = require'lspconfig'
 local opts = {
   tools = {
     autoSetHints = false,
