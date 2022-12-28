@@ -1,23 +1,28 @@
+set shell=fish
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'psf/black', { 'tag': '19.10b0' }
+" Plug 'datwaft/bubbly.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'chrisbra/Colorizer'
+" Plug 'github/copilot.vim', { 'tag': 'neovim-nightlies' }
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'ggandor/leap.nvim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'omnisharp/omnisharp-vim'
 Plug 'python-mode/python-mode'
 Plug 'vim-python/python-syntax'
 Plug 'luochen1990/rainbow'
+Plug 'vim-scripts/restore_view.vim'
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'puremourning/vimspector'
+" Plug 'puremourning/vimspector'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'alvan/vim-closetag'
@@ -39,22 +44,39 @@ Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
+Plug 'posva/vim-vue'
 
 """" Rust
-" Plug 'dense-analysis/ale'
+" Completion framework
+Plug 'hrsh7th/nvim-cmp'
+" LSP completion source for nvim-cmp
+Plug 'hrsh7th/cmp-nvim-lsp'
+" Snippet completion source for nvim-cmp
+Plug 'hrsh7th/cmp-vsnip'
+" Other usefull completion sources
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
+" To enable more of the features of rust-analyzer, such as inlay hints and more!
+Plug 'simrat39/rust-tools.nvim'
+" rust debugging
+Plug 'nvim-lua/plenary.nvim'
+Plug 'mfussenegger/nvim-dap'
+" Snippet engine
+Plug 'hrsh7th/vim-vsnip'
+" Fuzzy finder
+" Optional
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'rust-lang/rust.vim'
 Plug 'ron-rs/ron.vim'
 Plug 'mhinz/vim-crates'
-Plug 'simrat39/rust-tools.nvim'
-" Debugging
-Plug 'nvim-lua/plenary.nvim'
-Plug 'mfussenegger/nvim-dap'
 
 "" LSP
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'neovim/nvim-lspconfig'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " experimental
 Plug 'mbadran/jpythonfold.vim'
@@ -64,6 +86,9 @@ Plug 'davidhalter/jedi-vim'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'HallerPatrick/py_lsp.nvim'
+
+Plug 'arcticicestudio/nord-vim'
 
 """"""" lua
 Plug 'roxma/nvim-yarp'
@@ -87,17 +112,29 @@ Plug 'davisdude/vim-love-docs'
 " Plug 'filipekiss/ncm2-look.vim' " an english dictionary
 
 """ Colors
-Plug 'ghifarit53/tokyonight-vim'
+" Plug 'ghifarit53/tokyonight-vim'
 " Plug 'NLKNguyen/papercolor-theme'
-" Plug 'dracula/vim', {'name': 'dracula'}
+Plug 'dracula/vim', {'name': 'dracula'}
+Plug 'tanvirtin/monokai.nvim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'sainnhe/sonokai'
+Plug 'ayu-theme/ayu-vim'
 
 call plug#end()
+
+" tags
+autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
 set background=dark
 " set termguicolors
 " set t_Co=256   " This is may or may not needed.
-colorscheme tokyonight
-let g:airline_theme='tokyonight'
+" colorscheme tokyonight
+" colorscheme dracula
+" colorscheme monokai
+" colorscheme papercolor
+colorscheme sonokai
+" let g:airline_theme='tokyonight'
 " let g:PaperColor_Theme_Options = {
 "   \   'theme': {
 "   \     'default.dark': {
@@ -112,6 +149,13 @@ let g:airline_theme='tokyonight'
 "   \     }
 "   \   }
 "   \ }
+
+" save folds
+" augroup remember_folds
+"   autocmd!
+"   autocmd BufWinLeave *.* silent! mkview
+"   autocmd BufWinEnter *.* silent! loadview
+" augroup END
 
 " comments in italics
 let &t_ZH="\e[3m"
@@ -171,6 +215,9 @@ let g:pymode_lint_options_pep8 = {'ignore': ['E402', 'E501', 'F841', 'W503']}
 let g:pymode_lint_options_mccabe = {'ignore': ['C901']}
 let g:pymode_rope = 0
 let g:python_highlight_all = 1
+autocmd FileType python set omnifunc=syntaxcomplete#Complete
+" let g:python_host_prog = "/usr/bin/python3"
+" let g:python3_host_prog = "/usr/bin/python3"
 
 " Change number of spaces when indenting
 set shiftwidth=2
@@ -185,6 +232,7 @@ autocmd BufWritePre *.py silent! execute ':Black'
 
 syntax enable
 filetype plugin indent on
+filetype plugin on
 filetype indent on
 
 " preview window at bottom
@@ -218,6 +266,9 @@ imap jj <Esc>
 " windows
 nmap <c-w><space> :vsplit<CR>
 nmap <c-w>-     :split<CR>
+
+" term
+nmap <c-t> :vsplit<CR>:term<CR>
 
 " NERDTree
 " Automatically delete the buffer of the file you just deleted with NerdTree:
@@ -277,13 +328,21 @@ let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'fountain', 'help', 
 set updatetime=300
 
 " """"""" autocomplete settings """""""
-" enable ncm2 for all buffers
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-" IMPORTANT: :help Ncm2PopupOpen for more information
-" set completeopt=menuone,noselect,longest
-set completeopt=menu,menuone,longest,noselect
-inoremap <expr><TAB> pumvisible() ? "\<lt>Down>" : "<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ coc#pum#visible() ? coc#pum#next(1):
+  \ coc#expandableOrJumpable() ?
+  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	\ <SID>check_back_space() ? "\<TAB>" :
+	\ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+let g:coc_snippet_next = '<tab>'
+
 
 " leave terminal mode
 tnoremap <Leader>n <C-\><C-n>
@@ -301,7 +360,66 @@ let g:rustfmt_autosave = 1
 " As-you-type autocomplete
 let g:ale_completion_enabled = 1
 autocmd BufRead Cargo.toml call crates#toggle()
-luafile ~/.vim.lua
+luafile /Users/mart/.vim.lua
+
+" ledger commands
+au BufRead,BufNewFile *.journal nmap <c-m> 12<c-a>
+
+
+" Set completeopt to have a better completion experience
+" :help completeopt
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+" set completeopt=menuone,noinsert,noselect
+
+" Avoid showing extra messages when using completion
+" set shortmess+=c
+
+" Configure LSP through rust-tools.nvim plugin.
+" rust-tools will configure and enable certain LSP features for us.
+" See https://github.com/simrat39/rust-tools.nvim#configuration
+
+
+" Setup Completion
+" See https://github.com/hrsh7th/nvim-cmp#basic-configuration
+" lua <<EOF
+" local cmp = require'cmp'
+" cmp.setup({
+"   -- Enable LSP snippets
+"   snippet = {
+"     expand = function(args)
+"         vim.fn["vsnip#anonymous"](args.body)
+"     end,
+"   },
+"   mapping = {
+"     ['<C-p>'] = cmp.mapping.select_prev_item(),
+"     ['<C-n>'] = cmp.mapping.select_next_item(),
+"     -- Add tab support
+"     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+"     ['<Tab>'] = cmp.mapping.select_next_item(),
+"     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+"     ['<C-f>'] = cmp.mapping.scroll_docs(4),
+"     ['<C-Space>'] = cmp.mapping.complete(),
+"     ['<C-e>'] = cmp.mapping.close(),
+"     ['<CR>'] = cmp.mapping.confirm({
+"       behavior = cmp.ConfirmBehavior.Insert,
+"       select = true,
+"     })
+"   },
+
+"   -- Installed sources
+"   sources = {
+"     { name = 'nvim_lsp' },
+"     { name = 'vsnip' },
+"     { name = 'path' },
+"     { name = 'buffer' },
+"   },
+" })
+" EOF
+
+
+
 
 " typescript lsp
 " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
@@ -318,3 +436,8 @@ endif
 nnoremap <silent> K :call CocAction('doHover')<CR>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" restore view recommended settings
+set viewoptions=cursor,folds,slash,unix
+let g:skipview_files = ['*\.vim']
+
