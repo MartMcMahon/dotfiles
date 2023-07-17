@@ -7,6 +7,7 @@ Plug 'psf/black', { 'tag': '19.10b0' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'chrisbra/Colorizer'
+" Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'github/copilot.vim', { 'tag': 'neovim-nightlies' }
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
@@ -45,6 +46,8 @@ Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
+" notes
+Plug 'vimwiki/vimwiki'
 
 """" Rust
 " Completion framework
@@ -58,6 +61,8 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
 " To enable more of the features of rust-analyzer, such as inlay hints and more!
 Plug 'simrat39/rust-tools.nvim'
+" kdarkhan's fork fixes a render issue with inlay-hints
+" Plug 'kdarkhan/rust-tools.nvim'
 " rust debugging
 Plug 'nvim-lua/plenary.nvim'
 Plug 'mfussenegger/nvim-dap'
@@ -119,6 +124,13 @@ Plug 'tanvirtin/monokai.nvim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sainnhe/sonokai'
 Plug 'ayu-theme/ayu-vim'
+
+""" svelte
+Plug 'othree/html5.vim'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
+
+" wgsl
+Plug 'DingDean/wgsl.vim'
 
 call plug#end()
 
@@ -205,6 +217,18 @@ autocmd BufWritePre * %s/\s\+$//e
 " ctrl-p opens fzf buffers
 nnoremap <c-p> :Buffers<cr>
 
+" diplay japanese characters
+set fileencodings=ucs-bom,utf8,prc
+
+" ctrl-p uses Ag
+" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+"       \ --ignore .git
+"       \ --ignore .svn
+"       \ --ignore .hg
+"       \ --ignore .DS_Store
+"       \ --ignore "**/*.pyc"'
+"       \ -g ""'
+
 """"""""" python settings """""""""" {{{
 " use correct indentation for python-mode
 let g:pymode_python = 'python3'
@@ -231,9 +255,11 @@ autocmd BufWritePre *.py silent! execute ':Black'
 " autocmd BufWritePre *.py ImpSort!
 
 syntax enable
+syntax on        " for vimwiki
 filetype plugin indent on
 filetype plugin on
 filetype indent on
+set nocompatible " for vimwiki
 
 " preview window at bottom
 " set splitbelow
@@ -440,4 +466,3 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " restore view recommended settings
 set viewoptions=cursor,folds,slash,unix
 let g:skipview_files = ['*\.vim']
-

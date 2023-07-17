@@ -2,7 +2,13 @@ require("nvim-lsp-installer").setup {}
 local nvim_lsp = require'lspconfig'
 local opts = {
   tools = {
-    autoSetHints = false,
+    -- autoSetHints = false,
+    inlay_hints = {
+      auto = true,
+      parameter_hints_prefix = "<-",
+      other_hints_prefix  = "=>",
+      highlight = "Comment",
+    },
   },
   -- debugging stuff
 	dap = {
@@ -14,4 +20,5 @@ local opts = {
 	},
 }
 require('rust-tools').setup(opts)
-require('rust-tools.inlay_hints').set_inlay_hints()
+-- require('rust-tools.inlay_hints').set_inlay_hints()
+-- require('rust-tools').inlay_hints.set()
