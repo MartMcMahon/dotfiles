@@ -283,7 +283,7 @@ set hlsearch            " highlight matches
 set exrc
 
 map <Space> <Leader>
-" use \m to remove highlight
+" use <leader>m to remove highlight
 nmap <leader>m :noh<CR>
 
 " remap esc
@@ -295,6 +295,9 @@ nmap <c-w>-     :split<CR>
 
 " term
 nmap <c-t> :vsplit<CR>:term<CR>
+
+" increment
+nmap <c-x> <c-a>
 
 " NERDTree
 " Automatically delete the buffer of the file you just deleted with NerdTree:
