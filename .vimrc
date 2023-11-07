@@ -132,6 +132,12 @@ Plug 'evanleck/vim-svelte', {'branch': 'main'}
 " wgsl
 Plug 'DingDean/wgsl.vim'
 
+" godot
+Plug 'habamax/vim-godot'
+
+" C
+Plug 'vim-scripts/c.vim'
+
 call plug#end()
 
 " tags
@@ -469,3 +475,17 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " restore view recommended settings
 set viewoptions=cursor,folds,slash,unix
 let g:skipview_files = ['*\.vim']
+
+" build commands
+autocmd FileType rust nnoremap <c-c> :Crun<CR>
+autocmd FileType c nnoremap <c-c> :w <CR>:!gcc % <CR> :!./a.out <CR>
+autocmd FileType c nnoremap <f1> :w <CR>:!gcc % <CR>
+autocmd FileType c nnoremap <f2> :w <CR>:!gcc % <CR> :!./a.out <CR>
+autocmd FileType c nnoremap <f3> :w <CR>:!make <CR>
+
+" clang-format
+function! Formatonsave()
+  let l:formatdiff = 1
+  pyf ~/.vim/clang-format.py
+endfunction
+autocmd BufWritePre *.h,*.c,*.cc,*.cpp call Formatonsave()
