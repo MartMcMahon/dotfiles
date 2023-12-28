@@ -8,7 +8,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'chrisbra/Colorizer'
 " Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'github/copilot.vim', { 'tag': 'neovim-nightlies' }
+Plug 'github/copilot.vim'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -489,3 +489,7 @@ function! Formatonsave()
   pyf ~/.vim/clang-format.py
 endfunction
 autocmd BufWritePre *.h,*.c,*.cc,*.cpp call Formatonsave()
+
+" journal shortcuts
+au BufRead,BufNewFile *.journal map <c-e> ii <c-r>=strftime("%Y/%m/%d %T")<CR>
+au BufRead,BufNewFile *.journal map <c-l> io <c-r>=strftime("%Y/%m/%d %T")<CR>
