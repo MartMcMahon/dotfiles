@@ -491,5 +491,5 @@ endfunction
 autocmd BufWritePre *.h,*.c,*.cc,*.cpp call Formatonsave()
 
 " journal shortcuts
-au BufRead,BufNewFile *.journal map <c-e> ii <c-r>=strftime("%Y/%m/%d %T")<CR>
-au BufRead,BufNewFile *.journal map <c-l> io <c-r>=strftime("%Y/%m/%d %T")<CR>
+au BufRead,BufNewFile *.journal nmap <c-e> ii <c-r>=strftime("%Y/%m/%d %T")<CR>
+au BufRead,BufNewFile *.journal nmap <c-l> io <c-r>=strftime("%Y/%m/%d %T")<CR>
