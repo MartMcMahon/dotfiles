@@ -2,7 +2,7 @@ set shell=fish
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'psf/black', { 'tag': '19.10b0' }
+Plug 'psf/black'
 " Plug 'datwaft/bubbly.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
@@ -40,6 +40,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ledger/vim-ledger'
+Plug 'tpope/vim-markdown'
 " Plug 'jceb/vim-orgmode'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-repeat'
@@ -246,8 +247,9 @@ let g:pymode_lint_options_mccabe = {'ignore': ['C901']}
 let g:pymode_rope = 0
 let g:python_highlight_all = 1
 autocmd FileType python set omnifunc=syntaxcomplete#Complete
-" let g:python_host_prog = "/usr/bin/python3"
-" let g:python3_host_prog = "/usr/bin/python3"
+
+let g:python_host_prog = expand("/usr/local/bin/python3")
+let g:python3_host_prog = expand("/usr/local/bin/python3")
 
 " Change number of spaces when indenting
 set shiftwidth=2
@@ -454,8 +456,6 @@ au BufRead,BufNewFile *.journal nmap <c-m> 12<c-a>
 " EOF
 
 
-
-
 " typescript lsp
 " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
 let g:coc_global_extensions = [
@@ -493,3 +493,7 @@ autocmd BufWritePre *.h,*.c,*.cc,*.cpp call Formatonsave()
 " journal shortcuts
 au BufRead,BufNewFile *.journal nmap <c-e> ii <c-r>=strftime("%Y/%m/%d %T")<CR>
 au BufRead,BufNewFile *.journal nmap <c-l> io <c-r>=strftime("%Y/%m/%d %T")<CR>
+
+" invisible chars
+set list
+set listchars=tab:▷\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
