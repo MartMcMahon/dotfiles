@@ -9,7 +9,7 @@ export LOVE2D_PATH="/Applications/love.app/Contents/MacOS"
 export PATH="$HOME/bin:$PATH:$LOVE2D_PATH"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/martmcmahon/.oh-my-zsh"
+export ZSH="/Users/mart/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -20,6 +20,7 @@ export ZSH="/Users/martmcmahon/.oh-my-zsh"
 # ZSH_THEME='minimal'
 # ZSH_THEME="spaceship"
 # ZSH_THEME="sorin"
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
   # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -109,9 +110,10 @@ alias l="ls -alh"
 alias vim="nvim -O"
 alias ldfs='ls -A | l | grep "^-.\+ \..\+"'
 
-alias pip="python -m pip"
+alias pip="python3 -m pip"
+alias pip3="python3 -m pip"
 
-alias :q='echo "sir, this is an arby'\''s"'
+alias :q='echo "sir, this is an wendy'\''s"'
 
 export VISUAL=vim
 
@@ -129,4 +131,7 @@ zle -N zle-keymap-select
 export pi="192.168.1.135"
 
 # the fuck auto-correcter
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
