@@ -22,6 +22,7 @@ Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Plug 'vim-python/python-syntax'
 Plug 'luochen1990/rainbow'
 Plug 'vim-scripts/restore_view.vim'
+Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
 " Plug 'puremourning/vimspector'
@@ -503,3 +504,25 @@ au BufRead,BufNewFile *.journal nmap <c-l> io <c-r>=strftime("%Y/%m/%d %T")<CR>
 " invisible chars
 set list
 set listchars=tab:▷\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+
+" tabnine
+lua <<EOF
+require('tabnine').setup({
+  disable_auto_comment=true,
+  accept_keymap="<Tab>",
+  dismiss_keymap = "<C-]>",
+  debounce_ms = 800,
+  suggestion_color = {gui = "#808080", cterm = 244},
+  exclude_filetypes = {"TelescopePrompt", "NvimTree"},
+  log_file_path = nil, -- absolute path to Tabnine log file
+  ignore_certificate_errors = false,
+})
+vim.keymap.set("i", "<tab>", function()
+  if require("tabnine.keymaps").has_suggestion() then
+    return require("tabnine.keymaps").accept_suggestion()
+  else
+    return "<tab>"
+  end
+end, { expr = true })
+require('tabnine.status').status()
+EOF
