@@ -11,14 +11,15 @@ Plug 'chrisbra/Colorizer'
 Plug 'github/copilot.vim'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
+" fzf.vim depends on the basic Vim plugin of the main fzf repository, which means you need to set up both 'fzf' and 'fzf.vim' on Vim. To learn more about fzf/Vim integration
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'ggandor/leap.nvim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'omnisharp/omnisharp-vim'
-Plug 'python-mode/python-mode'
-Plug 'vim-python/python-syntax'
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" Plug 'vim-python/python-syntax'
 Plug 'luochen1990/rainbow'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'ternjs/tern_for_vim'
@@ -85,14 +86,14 @@ Plug 'neovim/nvim-lspconfig'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " experimental
-Plug 'mbadran/jpythonfold.vim'
-Plug 'davidhalter/jedi-vim'
+" Plug 'mbadran/jpythonfold.vim'
+" Plug 'davidhalter/jedi-vim'
 " Plug 'tweekmonster/impsort.vim'
 " Plug 'nvim-lua/popup.nvim'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'HallerPatrick/py_lsp.nvim'
+" Plug 'HallerPatrick/py_lsp.nvim'
 
 Plug 'arcticicestudio/nord-vim'
 
@@ -222,7 +223,9 @@ let g:gitgutter_map_keys = 0
 autocmd BufWritePre * %s/\s\+$//e
 
 " ctrl-p opens fzf buffers
-nnoremap <c-p> :Buffers<cr>
+nnoremap <c-p>b :Buffers<cr>
+nnoremap <c-p>p :Files<cr>
+nnoremap <c-p><c-p> :Files<cr>
 
 " diplay japanese characters
 set fileencodings=ucs-bom,utf8,prc
@@ -246,7 +249,7 @@ let g:pymode_lint_options_pep8 = {'ignore': ['E402', 'E501', 'F841', 'W503']}
 let g:pymode_lint_options_mccabe = {'ignore': ['C901']}
 let g:pymode_rope = 0
 let g:python_highlight_all = 1
-autocmd FileType python set omnifunc=syntaxcomplete#Complete
+" autocmd FileType python set omnifunc=syntaxcomplete#Complete
 
 let g:python_host_prog = expand("/usr/local/bin/python3")
 let g:python3_host_prog = expand("/usr/local/bin/python3")
@@ -489,6 +492,9 @@ function! Formatonsave()
   pyf ~/.vim/clang-format.py
 endfunction
 autocmd BufWritePre *.h,*.c,*.cc,*.cpp call Formatonsave()
+
+" C# omnisharp (unity)
+nmap <c-f> :OmniSharpFindUsages<CR>
 
 " journal shortcuts
 au BufRead,BufNewFile *.journal nmap <c-e> ii <c-r>=strftime("%Y/%m/%d %T")<CR>
