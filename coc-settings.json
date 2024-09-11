@@ -1,7 +1,8 @@
 {
   "rust-analyzer.inlayHints.enable": false,
   "snippets.ultisnips.pythonPrompt": false,
- "codeLens.enable": true,
- "coc.source.OmniSharp.enable" : true,
-  "coc.source.OmniSharp.triggerCharacters": ".",
+  "codeLens.enable": true,
+  "codeLens.position": "eol",
+  "coc.source.OmniSharp.enable": true,
+  "coc.source.OmniSharp.triggerCharacters": "."
 }
