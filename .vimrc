@@ -7,7 +7,6 @@ Plug 'psf/black'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'chrisbra/Colorizer'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'github/copilot.vim'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
@@ -22,8 +21,9 @@ Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Plug 'vim-python/python-syntax'
 Plug 'luochen1990/rainbow'
 Plug 'vim-scripts/restore_view.vim'
-Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
-Plug 'ternjs/tern_for_vim'
+" this was having issues. If something is missing, try out
+" https://github.com/neoclide/tern-neovim
+" Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
 " Plug 'puremourning/vimspector'
 Plug 'vim-airline/vim-airline'
@@ -144,8 +144,8 @@ Plug 'vim-scripts/c.vim'
 call plug#end()
 
 " tags
-autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
-autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
+" autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+" autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
 set background=dark
 " set termguicolors
@@ -226,6 +226,7 @@ autocmd BufWritePre * %s/\s\+$//e
 " ctrl-p opens fzf buffers
 nnoremap <c-p>b :Buffers<cr>
 nnoremap <c-p>p :Files<cr>
+nnoremap <c-p>f :Files<cr>
 nnoremap <c-p><c-p> :Files<cr>
 
 " diplay japanese characters
@@ -403,8 +404,6 @@ let g:ale_completion_enabled = 1
 autocmd BufRead Cargo.toml call crates#toggle()
 luafile /Users/mart/.vim.lua
 
-" ledger commands
-au BufRead,BufNewFile *.journal nmap <c-m> 12<c-a>
 
 
 " Set completeopt to have a better completion experience
@@ -498,31 +497,10 @@ autocmd BufWritePre *.h,*.c,*.cc,*.cpp call Formatonsave()
 nmap <c-f> :OmniSharpFindUsages<CR>
 
 " journal shortcuts
+au BufRead,BufNewFile *.journal nmap <c-m> 12<c-a>
 au BufRead,BufNewFile *.journal nmap <c-e> ii <c-r>=strftime("%Y/%m/%d %T")<CR>
 au BufRead,BufNewFile *.journal nmap <c-l> io <c-r>=strftime("%Y/%m/%d %T")<CR>
 
 " invisible chars
 set list
 set listchars=tab:▷\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-
-" tabnine
-lua <<EOF
-require('tabnine').setup({
-  disable_auto_comment=true,
-  accept_keymap="<Tab>",
-  dismiss_keymap = "<C-]>",
-  debounce_ms = 800,
-  suggestion_color = {gui = "#808080", cterm = 244},
-  exclude_filetypes = {"TelescopePrompt", "NvimTree"},
-  log_file_path = nil, -- absolute path to Tabnine log file
-  ignore_certificate_errors = false,
-})
-vim.keymap.set("i", "<tab>", function()
-  if require("tabnine.keymaps").has_suggestion() then
-    return require("tabnine.keymaps").accept_suggestion()
-  else
-    return "<tab>"
-  end
-end, { expr = true })
-require('tabnine.status').status()
-EOF
