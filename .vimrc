@@ -7,7 +7,7 @@ Plug 'psf/black'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'chrisbra/Colorizer'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'vim-scripts/fountain.vim'
 " fzf.vim depends on the basic Vim plugin of the main fzf repository, which means you need to set up both 'fzf' and 'fzf.vim' on Vim. To learn more about fzf/Vim integration
