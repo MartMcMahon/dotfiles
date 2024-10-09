@@ -21,6 +21,7 @@ Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Plug 'vim-python/python-syntax'
 Plug 'luochen1990/rainbow'
 Plug 'vim-scripts/restore_view.vim'
+Plug 'mrcjkb/rustaceanvim'
 " this was having issues. If something is missing, try out
 " https://github.com/neoclide/tern-neovim
 " Plug 'ternjs/tern_for_vim'
@@ -63,7 +64,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
 " To enable more of the features of rust-analyzer, such as inlay hints and more!
-Plug 'simrat39/rust-tools.nvim'
+" Plug 'simrat39/rust-tools.nvim'
 " kdarkhan's fork fixes a render issue with inlay-hints
 " Plug 'kdarkhan/rust-tools.nvim'
 " rust debugging
@@ -402,7 +403,7 @@ let g:rustfmt_autosave = 1
 " As-you-type autocomplete
 let g:ale_completion_enabled = 1
 autocmd BufRead Cargo.toml call crates#toggle()
-luafile /Users/mart/.vim.lua
+" luafile /Users/mart/.vim.lua
 
 
 
