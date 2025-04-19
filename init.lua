@@ -25,11 +25,24 @@ vim.keymap.set('n', '<leader>m', ':noh<cr>')
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
-        vim.highlight.on_yank()
+      vim.highlight.on_yank()
     end,
 })
 -- clipboard yanking
 vim.api.nvim_set_option("clipboard","unnamed")
+
+
+-- python
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "python",
+--   callback = function()
+--     vim.cmd.silent.Black()
+--   end,
+-- })
+vim.g.pymode_python = 'python3'
+-- vim.g.pymode_indent = 0
+vim.g.python_host_prog = '/usr/local/bin/python3'
+vim.g.python3_host_prog = '/usr/local/bin/python3'
 
 -- plugins
 local lazy = {}
@@ -82,69 +95,83 @@ lazy.setup({
   {'ledger/vim-ledger', ft = {'journal'} },
   -- {'olimorris/codecompanion.nvim'},
 
+  -- telescope
+  {'nvim-tree/nvim-web-devicons'},
+  {'nvim-treesitter/nvim-treesitter'},
+  {'nvim-lua/plenary.nvim'},
+  {'nvim-telescope/telescope-fzf-native.nvim'},
+  {'nvim-telescope/telescope.nvim',
+    config = function()
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+      vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+    end
+  },
+
   -- the tpope collection
   {'tpope/vim-markdown'},
   {'tpope/vim-repeat'},
   {'tpope/vim-surround'},
 
-  {
-    "neoclide/coc.nvim",
-    branch = "release",
-    build = ":CocInstall",
-    init = function()
-      if vim.fn.executable("node") ~= 1 then
-        vim.notify("CoC requires Node.js! Install it first.", vim.log.levels.ERROR)
-      end
-    end,
-    config = function()
-      vim.g.coc_global_extensions = {
-        'coc-json',
-        'coc-tsserver',
-        'coc-snippets',
-        'coc-rust-analyzer',
-      }
+  -- {
+  --   "neoclide/coc.nvim",
+  --   branch = "release",
+  --   build = ":CocInstall",
+  --   init = function()
+  --     if vim.fn.executable("node") ~= 1 then
+  --       vim.notify("CoC requires Node.js! Install it first.", vim.log.levels.ERROR)
+  --     end
+  --   end,
+  --   config = function()
+  --     vim.g.coc_global_extensions = {
+  --       'coc-json',
+  --       'coc-tsserver',
+  --       'coc-snippets',
+  --       'coc-rust-analyzer',
+  --     }
+  --
+  --     -- coc config
+  --     local function coc_tab()
+  --       if vim.fn['coc#pum#visible']() == 1 then
+  --         return vim.api.nvim_eval('coc#pum#next(1)')
+  --       end
+  --
+  --       local expandable = vim.fn['coc#expandableOrJumpable']()
+  --       if expandable == 1 then
+  --         return vim.fn['coc#rpc#request']('doKeymap', {'snippets-expand-jump',''})
+  --       end
+  --
+  --       local col = vim.fn.col('.') - 1
+  --       if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+  --         return '<Tab>'
+  --       else
+  --         return vim.fn['coc#refresh']()
+  --       end
+  --     end
+  --
+  --
+  --     vim.keymap.set('i', '<TAB>', coc_tab, {expr = true, silent = true})
+  --     vim.keymap.set('i', '<S-TAB>', function()
+  --       return vim.fn['coc#pum#visible']() == 1 and vim.fn['coc#pum#prev'](1) or '<C-h>'
+  --     end, {expr = true, noremap = true})
+  --     --
+  --     vim.keymap.set('i', '<CR>', [[coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"]], {
+  --       expr = true,
+  --       noremap = true
+  --     })
+  --
+  --     -- Snippet navigation
+  --     vim.g.coc_snippet_next = '<tab>'
+  --   end
+  -- },
 
-      -- coc config
-      local function coc_tab()
-        if vim.fn['coc#pum#visible']() == 1 then
-          return vim.api.nvim_eval('coc#pum#next(1)')
-        end
-
-        local expandable = vim.fn['coc#expandableOrJumpable']()
-        if expandable == 1 then
-          return vim.fn['coc#rpc#request']('doKeymap', {'snippets-expand-jump',''})
-        end
-
-        local col = vim.fn.col('.') - 1
-        if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-          return '<Tab>'
-        else
-          return vim.fn['coc#refresh']()
-        end
-      end
-
-
-      vim.keymap.set('i', '<TAB>', coc_tab, {expr = true, silent = true})
-      vim.keymap.set('i', '<S-TAB>', function()
-        return vim.fn['coc#pum#visible']() == 1 and vim.fn['coc#pum#prev'](1) or '<C-h>'
-      end, {expr = true, noremap = true})
-      --
-      vim.keymap.set('i', '<CR>', [[coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"]], {
-        expr = true,
-        noremap = true
-      })
-
-      -- Snippet navigation
-      vim.g.coc_snippet_next = '<tab>'
-    end
-  },
-
-  -- lsp
-  {'neovim/nvim-lspconfig'},
 
   -- python
-  {'psf/black'},
-  {'python-mode/python-mode'},
+  {'psf/black'},--, ft = {'python'} },
+  {'python-mode/python-mode'},--, ft = {'python'}},
+
   {'nvim-lualine/lualine.nvim'},
 
   -- js
@@ -159,21 +186,93 @@ lazy.setup({
 
   -- rust
   {'rust-lang/rust.vim'},
-
-  {'neovim/nvim-lspconfig', ft = {'rust'} },
   {'simrat39/rust-tools.nvim', ft = {'rust'} },
+  -- {'mrcjkb/rustaceanvim', ft = {'rust'} },
   -- debugging
   {'nvim-lua/plenary.nvim', ft = {'rust'} },
   {'mfussenegger/nvim-dap', ft = {'rust'} },
 
+  -- lsp
+  {'neovim/nvim-lspconfig'},
+  {'williamboman/mason.nvim',
+    config = function()
+      require('mason').setup()
+      -- require("mason-lspconfig").setup({
+      --   ensure_installed = {
+      --     "astro",
+      --     "rust_analyzer",
+      --     "tsserver",
+      --   }
+      -- })
+    end
+  },
+
+  -- astro
+  -- lspconfig["astro"].setup({
+  --  capabilities = capabilities,
+  --  on_attach = on_attach,
+  --  filetypes = { "astro" },
+  -- })
+  --
+  {'wuelnerdotexe/vim-astro', ft = { 'astro' },
+    config = function()
+     vim.g.astro_typescript = 'enable'
+   end
+  },
+
   -- themes
-  {'sainnhe/sonokai'},
+  {'sainnhe/sonokai'}, --- 2nd choice, prob
+  {'sainnhe/edge'},
   {'tiagovla/tokyodark.nvim'},
   {'folke/tokyonight.nvim'},
+  {'vague2k/vague.nvim'},
+  {'thesimonho/kanagawa-paper.nvim'},
+  {'datsfilipe/vesper.nvim'},
+  {'rose-pine/neovim'},
 })
 
+---- LSP
+local lspconfig = require("lspconfig")
+lspconfig["astro"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = { "astro" },
+})
+lspconfig.rust_analyzer.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      checkOnSave = {
+        command = "clippy"
+      }
+    },
+  },
+  on_attach = format,
+})
+-----
+
+local rt = require("rust-tools")
+  rt.setup({
+    server = {
+      on_attach = function(_, bufnr)
+        -- Hover actions
+        vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+        -- Code action groups
+        vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+      end,
+    },
+  })
+
 vim.opt.termguicolors = true
-vim.cmd.colorscheme('tokyonight')
+vim.cmd.colorscheme('edge')
+-- vim.cmd.colorscheme('tokyonight-night')
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "rust",
+--   callback = function()
+--     vim.g.sonokai_style = 'maia'
+--     vim.g.sonokai_better_performance = 1
+--     vim.cmd.colorscheme('sonokai')
+--   end
+-- })
 
 require('lualine').setup()
 
