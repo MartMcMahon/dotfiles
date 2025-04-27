@@ -48,8 +48,5 @@ return {
         }
       }
     })
-
-    -- lspconfig['rust_analyzer'].setup({ })
-
   end
 }
