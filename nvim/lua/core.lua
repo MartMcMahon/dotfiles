@@ -19,6 +19,14 @@ vim.keymap.set({'n', 'x'}, 'p', '"+p')
 vim.keymap.set('n', '<c-w> ', ':vsplit<cr>')
 vim.keymap.set('n', '<c-t>', ':split<cr>:term<cr>')
 vim.keymap.set('n', '<leader>m', ':noh<cr>')
+vim.keymap.set('n', '<leader>p',
+  function()
+    vim.lsp.buf.format()
+  end,
+  { silent = true }
+)
+
+vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -31,6 +39,7 @@ vim.api.nvim_set_option("clipboard","unnamed")
 
 
 -- python
+-- vim.g.python3_host_prog = vim.fn.exepath('~/.config/nvim/venv/bin/python')
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --   pattern = "python",
 --   callback = function()
@@ -39,8 +48,10 @@ vim.api.nvim_set_option("clipboard","unnamed")
 -- })
 vim.g.pymode_python = 'python3'
 -- vim.g.pymode_indent = 0
-vim.g.python_host_prog = '/usr/local/bin/python3'
-vim.g.python3_host_prog = '/usr/local/bin/python3'
+-- vim.g.python_host_prog = '/usr/local/bin/python3'
+vim.g.python3_host_prog = '/Users/mart/.config/nvim/venv/bin/python'
+
+
 
 
 local bufnr = vim.api.nvim_get_current_buf()

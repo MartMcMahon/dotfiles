@@ -48,5 +48,46 @@ return {
         }
       }
     })
+
+    lspconfig.pylsp.setup({
+      settings = {
+        pylsp = {
+          plugins = {
+            black = {
+              enabled = true,
+              -- line_length = 88
+            },
+            -- autopep8 = { enabled = false },
+            yapf = { enabled = false }
+          }
+        }
+      }
+    })
+
+    lspconfig.clangd.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- lspconfig.godot_lsp.setup({
+    --   cmd = { "godot", "--headless", "--lsp-port", "6008" },
+    --   filetypes = { "gdscript" }
+    -- })
+
+-- Auto-format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.py",
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.c", "*.h", "*.cpp", "*.cc", "*.hpp"},
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
+
   end
 }
