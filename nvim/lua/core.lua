@@ -26,6 +26,7 @@ vim.keymap.set('n', '<leader>p',
   { silent = true }
 )
 
+vim.keymap.set('i', 'jj', '<esc>', {desc = 'nrml mode'})
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
 -- highlight on yank
