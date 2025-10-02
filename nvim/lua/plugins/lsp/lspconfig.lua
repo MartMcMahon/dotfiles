@@ -6,7 +6,7 @@ return {
     { 'antosha417/nvim-lsp-file-operations', config = true },
   },
   config = function()
-    local lspconfig = require('lspconfig')
+    -- local lspconfig = require('lspconfig')
     local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
     local keymap = vim.keymap
@@ -21,17 +21,17 @@ return {
 
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    lspconfig['html'].setup({
+    vim.lsp.config('html', {
       capabilities = capabilities,
       on_attach = on_attach
     })
 
-    lspconfig['ts_ls'].setup({
+    vim.lsp.config('ts_ls', {
       capabilities = capabilities,
       on_attach = on_attach
     })
 
-    lspconfig['lua_ls'].setup({
+    vim.lsp.config('lua_ls', {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -49,7 +49,7 @@ return {
       }
     })
 
-    lspconfig.pylsp.setup({
+    vim.lsp.config('pylsp', {
       settings = {
         pylsp = {
           plugins = {
@@ -64,7 +64,7 @@ return {
       }
     })
 
-    lspconfig.clangd.setup({
+    vim.lsp.config('clangd', {
       capabilities = capabilities,
       on_attach = on_attach,
     })
