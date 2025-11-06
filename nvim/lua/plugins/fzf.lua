@@ -1,4 +1,4 @@
-return { "junegunn/fzf", 
+return { 'junegunn/fzf',
   build = "./install --all",
   name = "fzf"
 }

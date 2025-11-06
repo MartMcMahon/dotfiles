@@ -1,3 +1,5 @@
 return {
-  'psf/black', ft = {'python'} 
+  'psf/black',
+  ft = {'python'},
+  name = "black"
 }
