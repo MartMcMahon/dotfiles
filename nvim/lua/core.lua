@@ -40,20 +40,17 @@ vim.api.nvim_set_option("clipboard","unnamed")
 
 
 -- python
--- vim.g.python3_host_prog = vim.fn.exepath('~/.config/nvim/venv/bin/python')
--- vim.api.nvim_create_autocmd("BufWritePre", {
---   pattern = "python",
---   callback = function()
---     vim.cmd.silent.Black()
---   end,
--- })
+vim.g.python3_host_prog = vim.fn.exepath('~/.config/nvim/venv/bin/python')
 vim.g.pymode_python = 'python3'
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "python",
+  callback = function()
+    vim.cmd.silent.Black()
+  end,
+})
 -- vim.g.pymode_indent = 0
 -- vim.g.python_host_prog = '/usr/local/bin/python3'
-vim.g.python3_host_prog = '/Users/mart/.config/nvim/venv/bin/python'
-
-
-
+-- vim.g.python3_host_prog = '/Users/mart/.config/nvim/venv/bin/python'
 
 local bufnr = vim.api.nvim_get_current_buf()
 
