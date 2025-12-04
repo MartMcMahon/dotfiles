@@ -10,7 +10,7 @@ fish_add_path /opt/local/sbin
 set -x JAVA_HOME ~/jdk-20.jdk/Contents/Home
 fish_add_path $JAVA_HOME
 
-function fish_prompt 
+function fish_prompt
   echo (set_color cyan)(whoami) (set_color purple)(prompt_pwd) (set_color white)"\$ "
 end
 
@@ -27,10 +27,10 @@ function fish_right_prompt
     set -l magenta (set_color magenta)
     set -l cyan (set_color cyan)
     set -l normal (set_color normal)
-    
+
     set -l output
 
-    # python 
+    # python
     if set -q VIRTUAL_ENV
         set -l py_env (basename $VIRTUAL_ENV)
         set -a output $blue " $py_env " $normal
@@ -46,7 +46,7 @@ function fish_right_prompt
         end
     end
 
-    # rust 
+    # rust
     if test -f Cargo.toml
         set -l rust_ver (rustc --version 2>/dev/null | string split " ")[2]
         if test -n "$rust_ver"
