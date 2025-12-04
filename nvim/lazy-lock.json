@@ -26,6 +26,7 @@
   "render-markdown.nvim": { "branch": "main", "commit": "f58c05f349d6e7650f4b40b0df1514400f0c10de" },
   "rust-lang": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
   "rustaceanvim": { "branch": "master", "commit": "88575b98bb9937fb9983ddec5e532b67e75ce677" },
+  "snacks.nvim": { "branch": "main", "commit": "fe7cfe9800a182274d0f868a74b7263b8c0c020b" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "6fea601bd2b694c6f2ae08a6c6fab14930c60e2c" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "uv.nvim": { "branch": "main", "commit": "be4a7d47a976249282bb2f71fc773ac2f5325973" },
