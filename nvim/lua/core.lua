@@ -29,6 +29,14 @@ vim.keymap.set('n', '<leader>p',
 vim.keymap.set('i', 'jj', '<esc>', {desc = 'nrml mode'})
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
+-- orange comments
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "Comment", { fg = "#FF8E1C", italic = true })
+    vim.api.nvim_set_hl(0, "@comment", { fg = "#FF8E1C", italic = true })
+  end,
+})
+
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
@@ -40,7 +48,8 @@ vim.api.nvim_set_option("clipboard","unnamed")
 
 
 -- python
-vim.g.python3_host_prog = vim.fn.exepath('~/.config/nvim/venv/bin/python')
+vim.g.python_host_prog = vim.fn.exepath('/home/mart/.config/nvim/venv/bin/python')
+vim.g.python3_host_prog = vim.fn.exepath('/home/mart/.config/nvim/venv/bin/python')
 vim.g.pymode_python = 'python3'
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "python",
